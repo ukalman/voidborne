@@ -11,15 +11,26 @@ namespace Utilities
         Lose
     }
     
-    public enum GameStates
+    public enum GameState
     {
         None,
         Start,
+        GenerateGrid,
         LevelPrep,
         Gameplay,
+        SpawnHeroes,
+        SpawnEnemies,
+        HeroesTurn,
+        EnemiesTurn,
         LevelEnd,
         Pause,
         Win,
         Lose
+    }
+
+    public enum Faction
+    {
+        Hero,
+        Enemy
     }
 }
