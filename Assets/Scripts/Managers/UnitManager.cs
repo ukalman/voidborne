@@ -15,6 +15,8 @@ namespace Managers
         public static UnitManager Instance { get; private set; }
 
         private List<ScriptableUnit> _units;
+
+        public BaseHero SelectedHero;
         
         private void Awake()
         {
@@ -70,6 +72,12 @@ namespace Managers
         {
             // go through the list (_units), we want all of the units according to the faction that we want, we randomly shuffle them, then select the first one and return its prefab
             return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
+        }
+
+        public void SetSelectedHero(BaseHero hero)
+        {
+            SelectedHero = hero;
+            MenuManager.Instance.ShowSelectedHero(hero);
         }
         
     }

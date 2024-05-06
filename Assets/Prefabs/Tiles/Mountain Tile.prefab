@@ -89,8 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52735a0cd184356a6c7e4687fd31046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileName: Mountain
   _renderer: {fileID: 7926493038302575258}
   _highlight: {fileID: 5992885907422149249}
+  _isWalkable: 0
+  OccupiedUnit: {fileID: 0}
 --- !u!1 &5992885907422149249 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7061794207954300267, guid: 857732eb539c49d4f87886249ec85f81, type: 3}

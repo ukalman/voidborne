@@ -97,4 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ef9c5b2762468fb8a3264e0321def1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitName: Goblin
   OccupiedTile: {fileID: 0}
+  Faction: 1

@@ -97,4 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af0c6c02f60497aaa1eead5bd99ca82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UnitName: Knight
   OccupiedTile: {fileID: 0}
+  Faction: 0
