@@ -33,4 +33,27 @@ namespace Utilities
         Hero,
         Enemy
     }
+    
+    public enum ModuleState
+    {
+        Uninitialized,
+        Initialized,
+        PostInitialized,
+        Activated,
+        Deactivated,
+        Disabled,
+        Paused,
+        Resumed,
+        Restarted
+    }
+
+    public enum PlayerState
+    {
+        None,
+        Idle,
+        Move,
+        Inventory,
+        Attack,
+        Death
+    }
 }

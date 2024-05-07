@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Managers;
 using Units;
 using Units.Enemies;
@@ -41,6 +42,7 @@ namespace Tiles
         {
             if(GameManager.Instance.GameState != GameState.HeroesTurn) return;
 
+            // Means that there is 
             if (OccupiedUnit != null)
             {
                 if (OccupiedUnit.Faction == Faction.Hero) UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
@@ -56,16 +58,41 @@ namespace Tiles
                 }
             }
             else // Player (Hero) move logic
-            {
-                if (UnitManager.Instance.SelectedHero != null)
+            {   
+                BaseHero selectedHero = UnitManager.Instance.SelectedHero;
+                if (selectedHero != null && Walkable && !selectedHero.IsMoving)
                 {
-                    if (Walkable)
-                    {
-                        SetUnit(UnitManager.Instance.SelectedHero);
-                        UnitManager.Instance.SetSelectedHero(null); // deselect
-                    }
-                    
+                    // A* Path Finding
+                    var start = UnitManager.Instance.SelectedHero.OccupiedTile.transform.position;
+                    var end = transform.position;
+
+                    List<Vector2> path = GridManager.Instance.FindPath(start, end);
+
+                    StartCoroutine(selectedHero.FollowPath(path));
                 }
+                
+                    /* Old code
+                    BaseHero selectedHero = UnitManager.Instance.SelectedHero;
+
+                    if (selectedHero != null && Walkable && !selectedHero.IsMoving && GridManager.Instance.AreTilesAdjacent(selectedHero.OccupiedTile.transform.position, transform.position))
+                    {
+                        StartCoroutine(selectedHero.MoveToTile(this, 0.5f));
+                    }
+                    */
+
+                    /* Older code
+                    if (UnitManager.Instance.SelectedHero != null && Walkable)
+                    {
+
+                        // Check if the selected tile is adjacent to the hero's current tile
+                        if (GridManager.Instance.AreTilesAdjacent(UnitManager.Instance.SelectedHero.OccupiedTile.transform.position, transform.position))
+                        {
+                            SetUnit(UnitManager.Instance.SelectedHero);
+                            //UnitManager.Instance.SetSelectedHero(null); // deselect
+                        }
+                        
+                    }
+                    */
             }
         }
 
