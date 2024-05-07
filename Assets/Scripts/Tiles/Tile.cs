@@ -59,19 +59,23 @@ namespace Tiles
             }
             else // Player (Hero) move logic
             {   
+                
                 BaseHero selectedHero = UnitManager.Instance.SelectedHero;
                 if (selectedHero != null && Walkable && !selectedHero.IsMoving)
                 {
                     // A* Path Finding
-                    var start = UnitManager.Instance.SelectedHero.OccupiedTile.transform.position;
-                    var end = transform.position;
+                    Tile startTile = UnitManager.Instance.SelectedHero.OccupiedTile;
+                    Tile endTile = this; 
 
-                    List<Vector2> path = GridManager.Instance.FindPath(start, end);
-
-                    StartCoroutine(selectedHero.FollowPath(path));
+                    List<Tile> path = GridManager.Instance.FindPath(startTile.transform.position, endTile.transform.position);
+                    if (path != null)
+                    {
+                        StartCoroutine(UnitManager.Instance.SelectedHero.FollowPath(path));
+                    }
                 }
                 
-                    /* Old code
+                
+                    /*
                     BaseHero selectedHero = UnitManager.Instance.SelectedHero;
 
                     if (selectedHero != null && Walkable && !selectedHero.IsMoving && GridManager.Instance.AreTilesAdjacent(selectedHero.OccupiedTile.transform.position, transform.position))
@@ -79,6 +83,7 @@ namespace Tiles
                         StartCoroutine(selectedHero.MoveToTile(this, 0.5f));
                     }
                     */
+                    
 
                     /* Older code
                     if (UnitManager.Instance.SelectedHero != null && Walkable)

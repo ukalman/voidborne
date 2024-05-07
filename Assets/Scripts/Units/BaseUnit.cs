@@ -11,23 +11,27 @@ namespace Units
         public string UnitName;
         public Tile OccupiedTile;
         public Faction Faction;
+        
         public bool IsMoving { get; private set; }
         
-        public IEnumerator FollowPath(List<Vector2> path)
+        // the parameter path, should be a list containing Tiles, not Vector2's.
+        public IEnumerator FollowPath(List<Tile> path)
         {
-            Debug.Log(path);
             IsMoving = true;
+            Debug.Log(path.Count);
 
-            foreach (Vector2 position in path)
+            foreach (Tile tile in path)
             {
-                // Wait until the unit reaches each point on the path
-                yield return StartCoroutine(MoveTo(position, 0.5f));
+                if (tile != OccupiedTile) // Ensure the tile is not the one we're already on
+                {
+                    yield return StartCoroutine(MoveToTile(tile, 0.5f)); // Use the adjusted method that handles tile transition
+                }
             }
 
             IsMoving = false;
         }
 
-        // Move to a specific position
+        // Move to a specific position (not so good)
         private IEnumerator MoveTo(Vector2 targetPosition, float duration)
         {
             Vector3 startPosition = transform.position;
@@ -45,7 +49,7 @@ namespace Units
         }
         
         
-        /* Old Code
+        // Move to a specific tile (much better)
         public IEnumerator MoveToTile(Tile targetTile, float baseDuration)
         {
             Vector3 startPosition = transform.position;
@@ -67,7 +71,7 @@ namespace Units
             targetTile.OccupiedUnit = this;
             IsMoving = false;
         }
-        */
+        
         
     }
 }

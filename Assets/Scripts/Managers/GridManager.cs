@@ -84,9 +84,15 @@ namespace Managers
             return Math.Abs(pos1.x - pos2.x) <= 1 && Math.Abs(pos1.y - pos2.y) <= 1 && (pos1 != pos2);
         }
         
-        public List<Vector2> FindPath(Vector2 start, Vector2 end)
+        public List<Tile> FindPath(Vector2 start, Vector2 end)
         {
             var openSet = new PriorityQueue<PathNode>();
+            foreach (var node in _pathNodes.Values)
+            {
+                node.Cost = float.MaxValue;
+                node.CameFrom = null;
+            }
+
             var startNode = _pathNodes[start];
             var endNode = _pathNodes[end];
             startNode.Cost = 0;
@@ -122,13 +128,13 @@ namespace Managers
             return null;  // No path found
         }
 
-        private List<Vector2> ReconstructPath(PathNode endNode)
+        private List<Tile> ReconstructPath(PathNode endNode)
         {
-            var path = new List<Vector2>();
+            var path = new List<Tile>();
             var currentNode = endNode;
             while (currentNode != null)
             {
-                path.Add(currentNode.Position);
+                path.Add(_tiles[currentNode.Position]);
                 currentNode = currentNode.CameFrom;
             }
             path.Reverse();
