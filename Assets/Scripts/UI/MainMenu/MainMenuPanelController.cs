@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Managers;
 using UnityEngine.UI;
 
 namespace UI.MainMenu
@@ -16,6 +17,7 @@ namespace UI.MainMenu
         public void OpenSettings()
         {
             Debug.Log("Settings button clicked");
+            Managers.UIManager.Instance.OpenSettings();
         }
 
         public void OpenControls()

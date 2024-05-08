@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Utilities;
 
@@ -10,22 +11,34 @@ namespace Managers
 
         public GameState GameState;
        
-        private void Awake()
-        {
-            if (Instance == null)
-            {
+        private void Awake() {
+            if (Instance == null) {
+                Debug.Log("Game Manager awake.");
                 Instance = this;
-                DontDestroyOnLoad(gameObject); 
-            }
-            else
-            {
+                DontDestroyOnLoad(gameObject);
+            } else {
                 Destroy(gameObject);
             }
         }
-        void Start()
+
+        private void Start()
         {
-            ChangeState(GameState.GenerateGrid);
+            ChangeState(GameState.Start);
+            //ChangeState(GameState.GenerateGrid);
         }
+        
+        /*
+        private void Start() {
+            StartCoroutine(InitializeGame());
+        }
+
+        IEnumerator InitializeGame() {
+            while (UIManager.Instance == null)
+                yield return null;  // Wait until UIManager is initialized
+            ChangeState(GameState.Start);
+            //ChangeState(GameState.GenerateGrid);
+        }
+        */
 
         public void ChangeState(GameState newState)
         {
@@ -36,6 +49,9 @@ namespace Managers
                 case GameState.None:
                     break;
                 case GameState.Start:
+                    Debug.Log("Game State is Start!");
+                    Debug.Log(UIManager.Instance);
+                    UIManager.Instance.OpenMainMenu();
                     break;
                 case GameState.GenerateGrid:
                     GridManager.Instance.GenerateGrid();
