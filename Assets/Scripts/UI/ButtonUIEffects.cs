@@ -1,11 +1,10 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Utilities;
 
-namespace UI.MainMenu
+namespace UI
 {
-    public class MainMenuUIEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class ButtonUIEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         // Default Text Color is: A18D8D
         public string defaultColor = "#A18D8D";

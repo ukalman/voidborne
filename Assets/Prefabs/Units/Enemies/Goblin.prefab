@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7534647689681575321}
   - component: {fileID: 6938140274140580748}
-  - component: {fileID: 2490870880700613824}
+  - component: {fileID: 7939500275156868040}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Untagged
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2490870880700613824
+--- !u!114 &7939500275156868040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5218677810103893473}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10ef9c5b2762468fb8a3264e0321def1, type: 3}
+  m_Script: {fileID: 11500000, guid: 00fb21963e424f9282ccd74fe1bade4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UnitName: Goblin
   OccupiedTile: {fileID: 0}
-  Faction: 1
+  Faction: 0

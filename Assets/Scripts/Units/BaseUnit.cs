@@ -12,6 +12,16 @@ namespace Units
         public Tile OccupiedTile;
         public Faction Faction;
         
+        public int Health { get; set; } // Total vitality 
+        public int Armor { get; set; } //  Essential for withstanding attacks in melee combat.
+        public int Strength { get; set; } //  Directly impacts their melee damage output.
+        public int Power { get; set; } //  Increases spell damage and critical spell effects.
+        public int Intelligence { get; set; } 
+        public int Dexterity { get; set; } //  Improves precision, critical strikes, and lockpicking abilities.
+        public int Agility { get; set; } // Increases dodging capabilities, essential for a character who might wear lighter armor.
+        public int Charisma { get; set; } // Useful for manipulating NPCs or bartering with traders using magical artifacts.
+        public int Focus { get; set; } // Enhances critical rate and aiming proficiency, crucial for a ranged fighter.
+        
         public bool IsMoving { get; private set; }
         
         // the parameter path, should be a list containing Tiles, not Vector2's.
@@ -70,6 +80,11 @@ namespace Units
             OccupiedTile = targetTile;
             targetTile.OccupiedUnit = this;
             IsMoving = false;
+        }
+        
+        public virtual void Attack(BaseUnit target)
+        {
+            // Example: target.Health -= this.Strength - target.Armor;
         }
         
         
