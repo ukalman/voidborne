@@ -56,6 +56,11 @@ namespace Managers
             CoreUISignals.Instance.OnOpenPanel?.Invoke(UIPanelTypes.Settings, 0);
         }
 
+        public void OpenCharacterCreationPanel()
+        {
+            CoreUISignals.Instance.OnOpenPanel?.Invoke(UIPanelTypes.CharacterCreation, 0);
+        }
+
         
         
         

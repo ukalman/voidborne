@@ -1,8 +1,10 @@
 using System;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Utilities;
 
 namespace UI.CharacterCreation
 {
@@ -15,11 +17,19 @@ namespace UI.CharacterCreation
         public Button ReadyUnreadyButton;
         public Button ConfirmButton;
         public Button ResetButton;
-
-        private bool _isReady = false;
+        public Button ReturnButton;
+        
+        
+        public TMP_Text ReadyUnreadyText;
+        
+        public static bool IsReady = false;
         
         public static int FreePoints = 10;
+        public static bool IsReadyClicked = false;
 
+        public static UnityAction OnResetAttributes = delegate { };
+        
+        
         public static void OnDecrementStat()
         {
             FreePoints += 1;
@@ -50,13 +60,33 @@ namespace UI.CharacterCreation
         public void UpdateButtonInteractivity()
         {
             ReadyUnreadyButton.interactable = CheckIfReadyToPressReady();
-            ConfirmButton.interactable = _isReady;
-            
+            ConfirmButton.interactable = IsReady;
+            ResetButton.interactable = !IsReady && (FreePoints < 10);
+
+            CharacterNameInputField.interactable = !IsReady;
+
         }
 
         public void ResetAttributes()
         {
+            if (FreePoints < 10)
+            {
+                OnResetAttributes?.Invoke();
+                FreePoints = 10;
+            }
             
+        }
+
+        public void OnReadyUnreadyClicked()
+        {
+            IsReady = !IsReady;
+
+            ReadyUnreadyText.text = IsReady ? "Go Back" : "Ready";
+        }
+
+        public void OnReturnButtonClicked()
+        {
+            GameManager.Instance.ChangeState(GameState.Start);
         }
         
     }

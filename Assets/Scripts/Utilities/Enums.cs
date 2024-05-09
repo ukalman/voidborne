@@ -5,6 +5,7 @@ namespace Utilities
     {
         MainMenu, // Start
         Settings,
+        CharacterCreation,
         Level,
         Pause,
         Win,
@@ -14,7 +15,8 @@ namespace Utilities
     public enum GameState
     {
         None,
-        Start,
+        Start, // MainMenu (Settings, Credits, Controls, etc.)
+        CharacterCreation,
         GenerateGrid,
         LevelPrep,
         Gameplay,

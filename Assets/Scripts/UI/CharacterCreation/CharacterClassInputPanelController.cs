@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -32,9 +33,15 @@ namespace UI.CharacterCreation
             _equipmentImages[1] = Resources.Load<Sprite>("Sprites/Weapons/weapon_bow");
             _equipmentImages[2] = Resources.Load<Sprite>("Sprites/Weapons/weapon_red_magic_staff");
         
-            UpdateClassDisplay();
+            //UpdateClassDisplay();
             
         }
+
+        private void Update()
+        {
+            UpdateClassDisplay();
+        }
+
 
         public void NextClass()
         {
@@ -45,7 +52,7 @@ namespace UI.CharacterCreation
             
             OnClassChange?.Invoke(_classNames[_currentClassIndex]);
             
-            UpdateClassDisplay();
+            //UpdateClassDisplay();
         }
 
         public void PreviousClass()
@@ -57,11 +64,14 @@ namespace UI.CharacterCreation
             
             OnClassChange?.Invoke(_classNames[_currentClassIndex]);
             
-            UpdateClassDisplay();
+            //UpdateClassDisplay();
         }
 
         private void UpdateClassDisplay()
         {
+            PreviousButton.gameObject.SetActive(!CharacterCreationPanelController.IsReady);
+            NextButton.gameObject.SetActive(!CharacterCreationPanelController.IsReady);
+            
             ClassNameDisplay.text = _classNames[_currentClassIndex];
             ClassInfoDisplay.text = _classDescriptions[_currentClassIndex];
             EquipmentImage.sprite = _equipmentImages[_currentClassIndex];  // Update the equipment image

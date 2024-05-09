@@ -2,6 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using Managers;
 using UnityEngine.UI;
+using Utilities;
 
 namespace UI.MainMenu
 {
@@ -11,6 +12,7 @@ namespace UI.MainMenu
         public void PlayGame()
         {
             Debug.Log("Play Game button clicked");
+            GameManager.Instance.ChangeState(GameState.CharacterCreation);
             // SceneManager.LoadScene("GameScene");
         }
 

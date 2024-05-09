@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Utilities;
 
 public class SettingsPanelController : MonoBehaviour
 {
@@ -123,7 +125,13 @@ public class SettingsPanelController : MonoBehaviour
 
     public void OnOKButtonClicked()
     {
-        Managers.UIManager.Instance.OpenMainMenu();
+        // save the changes too
+        UIManager.Instance.OpenMainMenu();
+    }
+    
+    public void OnReturnButtonClicked()
+    {
+        UIManager.Instance.OpenMainMenu();
     }
     
 }

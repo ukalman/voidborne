@@ -19,6 +19,7 @@ namespace UI.CharacterCreation
 
         public int StatPoints = 0;
         public int ExtraPoints = 0;
+        public int TotalPoints = 0;
         private const int MinStatPoints = 0;
         private const int MaxStatPoints = 20;
 
@@ -29,6 +30,7 @@ namespace UI.CharacterCreation
         void Start()
         {
             CharacterClassInputPanelController.OnClassChange += OnClassChange;
+            CharacterCreationPanelController.OnResetAttributes += OnResetAttribute;
             StatPointsDisplay.text = StatPoints.ToString();
             UpdateButtonInteractivity();
             OnClassChange("Knight");
@@ -37,11 +39,14 @@ namespace UI.CharacterCreation
         private void Update()
         {
             UpdateButtonInteractivity();
+            CheckIfReady(); // Also updates Stat Point Display
+            UpdateExtraPointsDisplay();
         }
 
         private void OnDestroy()
         {
             CharacterClassInputPanelController.OnClassChange -= OnClassChange;
+            CharacterCreationPanelController.OnResetAttributes -= OnResetAttribute;
         }
 
         private void OnClassChange(string className)
@@ -71,7 +76,13 @@ namespace UI.CharacterCreation
                     
                     break;
             }
-            UpdateExtraPointsDisplay();
+            //UpdateExtraPointsDisplay();
+        }
+
+        private void OnResetAttribute()
+        {
+            StatPoints = 0;
+            TotalPoints = 0;
         }
     
 
@@ -81,13 +92,30 @@ namespace UI.CharacterCreation
             DecrementButton.interactable = StatPoints > MinStatPoints;
         }
 
+        private void CheckIfReady()
+        {
+            if (CharacterCreationPanelController.IsReady)
+            {
+                DecrementButton.gameObject.SetActive(false);
+                IncrementButton.gameObject.SetActive(false);
+                TotalPoints = StatPoints + ExtraPoints;
+
+            }
+            else
+            {
+                DecrementButton.gameObject.SetActive(true);
+                IncrementButton.gameObject.SetActive(true);
+            }
+            UpdateStatPointsDisplay();
+        }
+
         public void IncrementStatPoints()
         {
             if (StatPoints < MaxStatPoints)
             {
                 StatPoints++;
                 CharacterCreationPanelController.OnIncrementStat();
-                UpdateStatPointsDisplay();
+                //UpdateStatPointsDisplay();
             }
             
             
@@ -100,28 +128,44 @@ namespace UI.CharacterCreation
             {
                 StatPoints--;
                 CharacterCreationPanelController.OnDecrementStat();
-                UpdateStatPointsDisplay();
+                //UpdateStatPointsDisplay();
             }
             
         }
 
         private void UpdateStatPointsDisplay()
         {
-            StatPointsDisplay.text = StatPoints.ToString();
+            StatPointsDisplay.text = !CharacterCreationPanelController.IsReady ? StatPoints.ToString() : TotalPoints.ToString();
+
+
             //UpdateButtonInteractivity();
         }
 
         private void UpdateExtraPointsDisplay()
         {
-            if (ExtraPoints == 0)
+
+            if (!CharacterCreationPanelController.IsReady)
             {
-                ExtraPointsDisplay.text = "";
+                if (ExtraPoints == 0)
+                {
+                    ExtraPointsDisplay.text = "";
+                }
+                else
+                {
+                    ExtraPointsDisplay.text = "+" + ExtraPoints;
+                } 
             }
             else
             {
-                ExtraPointsDisplay.text = "+" + ExtraPoints;
+                ExtraPointsDisplay.text = "";
             }
             
+            
+        }
+
+        private void CalculateTotalPoints()
+        {
+            TotalPoints = StatPoints + ExtraPoints;
         }
     
     }

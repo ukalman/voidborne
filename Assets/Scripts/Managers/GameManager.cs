@@ -23,8 +23,8 @@ namespace Managers
 
         private void Start()
         {
-            ChangeState(GameState.Start);
-            //ChangeState(GameState.GenerateGrid);
+            //ChangeState(GameState.Start);
+            ChangeState(GameState.GenerateGrid);
         }
         
         /*
@@ -52,6 +52,9 @@ namespace Managers
                     Debug.Log("Game State is Start!");
                     Debug.Log(UIManager.Instance);
                     UIManager.Instance.OpenMainMenu();
+                    break;
+                case GameState.CharacterCreation:
+                    UIManager.Instance.OpenCharacterCreationPanel();
                     break;
                 case GameState.GenerateGrid:
                     GridManager.Instance.GenerateGrid();
