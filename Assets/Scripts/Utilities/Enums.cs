@@ -59,4 +59,12 @@ namespace Utilities
         Attack,
         Death
     }
+
+    public enum HeroType
+    {
+        Knight,
+        Archer,
+        Mage
+    }
+    
 }

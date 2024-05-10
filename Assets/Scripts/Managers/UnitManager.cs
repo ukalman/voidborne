@@ -74,6 +74,14 @@ namespace Managers
             return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
         }
 
+        public BaseHero GetBaseHero(HeroType heroType, int strength, int armor, int power, int intelligence, int dexterity, int agility, int charisma, int focus)
+        {
+            BaseHero hero = (BaseHero)_units.First(u => u.HeroType == heroType).UnitPrefab;
+            hero.SetAttributes(strength, armor, power, intelligence, dexterity, agility, charisma, focus);
+            return hero;
+        }
+        
+
         public void SetSelectedHero(BaseHero hero)
         {
             SelectedHero = hero;

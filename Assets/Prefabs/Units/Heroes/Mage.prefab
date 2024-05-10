@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1678688165686255468}
   - component: {fileID: 5931159577650725583}
-  - component: {fileID: -8977282429993795215}
+  - component: {fileID: 7106991842097201950}
   m_Layer: 0
-  m_Name: Knight
+  m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d729abe4b922f0f4aa6024eba3062251, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e8d5c3c448388894ca64baa9712402ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8977282429993795215
+--- !u!114 &7106991842097201950
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,9 +94,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5742135827120169104}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3cf566a8991485b84cae4f37e0818fe, type: 3}
+  m_Script: {fileID: 11500000, guid: ea935bad0e174ac18f1f9314adbca8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitName: Knight
+  UnitName: Mage
   OccupiedTile: {fileID: 0}
   Faction: 0

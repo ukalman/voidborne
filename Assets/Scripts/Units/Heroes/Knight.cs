@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Units.Heroes
 {
     public class Knight : BaseHero
@@ -14,5 +16,12 @@ namespace Units.Heroes
          It might also let them strategize better in shield formations or defensive stances, 
          providing bonuses when defending or countering attacks.
          */
+        public override void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility, int charisma,
+            int focus)
+        {
+            base.SetAttributes(strength, armor, power, intelligence, dexterity, agility, charisma, focus);
+            Health = 100;
+            Debug.Log("Knight attributes set!");
+        }
     }
 }

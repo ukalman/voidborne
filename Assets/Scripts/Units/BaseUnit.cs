@@ -23,6 +23,20 @@ namespace Units
         public int Focus { get; set; } // Enhances critical rate and aiming proficiency, crucial for a ranged fighter.
         
         public bool IsMoving { get; private set; }
+
+        public virtual void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility,
+            int charisma, int focus)
+        {
+            Strength = strength;
+            Armor = armor;
+            Power = power;
+            Intelligence = intelligence;
+            Dexterity = dexterity;
+            Agility = agility;
+            Charisma = charisma;
+            Focus = focus;
+        }
+        
         
         // the parameter path, should be a list containing Tiles, not Vector2's.
         public IEnumerator FollowPath(List<Tile> path)
