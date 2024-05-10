@@ -59,6 +59,9 @@ namespace Managers
                 case GameState.GenerateGrid:
                     GridManager.Instance.GenerateGrid();
                     break;
+                case GameState.Battle:
+                    StartCoroutine(BattleManager.Instance.InitiateBattle());
+                    break;
                 case GameState.LevelPrep:
                     break;
                 case GameState.Gameplay:

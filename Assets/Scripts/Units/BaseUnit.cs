@@ -82,9 +82,11 @@ namespace Units
             IsMoving = false;
         }
         
+        
         public virtual void Attack(BaseUnit target)
         {
-            // Example: target.Health -= this.Strength - target.Armor;
+            // Implement generic attack logic here
+            // Example: target.Health -= this.Strength * this.weapon.damage - target.Armor;
         }
         
         

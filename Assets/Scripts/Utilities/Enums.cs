@@ -18,6 +18,7 @@ namespace Utilities
         Start, // MainMenu (Settings, Credits, Controls, etc.)
         CharacterCreation,
         GenerateGrid,
+        Battle,
         LevelPrep,
         Gameplay,
         SpawnHeroes,
