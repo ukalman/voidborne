@@ -15,6 +15,8 @@ namespace Managers
         public static UnitManager Instance { get; private set; }
 
         private List<ScriptableUnit> _units;
+        
+        public List<BaseEnemy> _enemies;
 
         public BaseHero SelectedHero;
         
@@ -64,6 +66,11 @@ namespace Managers
                 randomSpawnTile.SetUnit(spawnedEnemy);
 
             }
+            
+            _enemies = GameObject.FindGameObjectsWithTag("Enemy")
+                .Select(obj => obj.GetComponent<BaseEnemy>())
+                .Where(enemy => enemy != null)
+                .ToList();
             
             GameManager.Instance.ChangeState(GameState.HeroesTurn);
         }
