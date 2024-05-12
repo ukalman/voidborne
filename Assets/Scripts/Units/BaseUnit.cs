@@ -100,7 +100,20 @@ namespace Units
         public virtual void Attack(BaseUnit target)
         {
             // Implement generic attack logic here
+            target.Health -= this.Strength - target.Armor;
+            target.DeathControl();
             // Example: target.Health -= this.Strength * this.weapon.damage - target.Armor;
+        }
+
+
+        public void DeathControl()
+        {
+            Debug.Log(this.UnitName + " Health: " + this.Health);
+            if (this.Health <= 0)
+            {
+                Debug.Log(this.UnitName + " is dead");
+                Destroy(this);
+            }
         }
         
         

@@ -1,4 +1,7 @@
 using System.Collections;
+using System.Linq;
+using Units;
+using Units.Enemies;
 using UnityEngine;
 
 namespace Managers
@@ -9,8 +12,10 @@ namespace Managers
 
         // Attributes
         // selected hero
+        public BaseUnit Player;
         
         // enemy (or enemies)
+        public BaseUnit Enemy;
         
         // isBattleOver
         
@@ -34,7 +39,30 @@ namespace Managers
         {
             // battle logic vs vs.
             // calls hero's and enemy's Attack functions respectively
+            Debug.Log("Battle!");
+            
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseUnit>();
+            Enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();
+
+            while (Player != null && Enemy != null)
+            {
+                yield return StartCoroutine(PlayerTurn());
+                yield return StartCoroutine(EnemyTurn());
+            }
+            
             yield return null;
+        }
+
+        public IEnumerator PlayerTurn()
+        {
+            Player.Attack(Enemy);
+            yield return new WaitForSeconds(1);
+        }
+        
+        public IEnumerator EnemyTurn()
+        {
+            Enemy.Attack(Player);
+            yield return new WaitForSeconds(1);
         }
     }
 }

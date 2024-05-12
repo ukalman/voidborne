@@ -6,7 +6,10 @@ namespace Units.Enemies
     {
         private void Awake()
         {
-            AlertDistance = 3;
+            AlertDistance = 5;
+            Health = 5;
+            Strength = 1;
+            Armor = 1;
         }
     }
 }

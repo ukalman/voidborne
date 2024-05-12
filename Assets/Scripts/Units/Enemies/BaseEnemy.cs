@@ -1,7 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 using Managers;
 using Tiles;
 using UnityEngine;
+using Utilities;
 
 namespace Units.Enemies
 {
@@ -9,12 +11,9 @@ namespace Units.Enemies
     {
         public int ThreatLevel { get; set; } 
         protected int AlertDistance { get; set; }
-
         protected GameObject Player;
-
         protected List<Tile> pathToPlayer;
-
-        protected bool AlertState = false;
+        //protected bool AlertState = false;
         
         
         private void Update()
@@ -31,12 +30,12 @@ namespace Units.Enemies
             // Iterate through enemies and check if player is close
             foreach (var enemy in UnitManager.Instance._enemies)
             {
-                if (enemy.IsPlayerClose(Player.transform) && !AlertState)
+                if (enemy.IsPlayerClose(Player.transform))// && !AlertState)
                 {
                     // Trigger alert behavior for this enemy
-                    AlertState = true;
+                    //AlertState = true;
                     Debug.Log("ALERT!");
-                    StartCoroutine(enemy.FollowPath(pathToPlayer));
+                    StartCoroutine(FollowPathAndNotify(enemy.FollowPath(pathToPlayer)));
                 }
             }
         }
@@ -59,6 +58,14 @@ namespace Units.Enemies
                 return false;
 
             return pathToPlayer.Count <= AlertDistance;
+        }
+        
+        // Coroutine to follow the path and notify when done
+        protected IEnumerator FollowPathAndNotify(IEnumerator pathCoroutine)
+        {
+            yield return StartCoroutine(pathCoroutine);
+            Debug.Log("done");
+            GameManager.Instance.ChangeState(GameState.Battle);
         }
     }
 }

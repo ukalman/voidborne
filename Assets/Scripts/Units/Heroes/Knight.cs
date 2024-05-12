@@ -1,9 +1,16 @@
+using System;
 using UnityEngine;
 
 namespace Units.Heroes
 {
     public class Knight : BaseHero
     {
+        private void Awake()
+        {
+            Health = 10;
+            Strength = 2;
+            Armor = 2;
+        }
         /*
          * Health: High — Knights are frontline fighters and need substantial health.
          * Armor: High — Essential for withstanding attacks in melee combat.
