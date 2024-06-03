@@ -2,7 +2,9 @@ using System;
 using Tiles;
 using TMPro;
 using Units.Heroes;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -10,6 +12,11 @@ namespace Managers
     {
         public static MenuManager Instance { get; private set; }
 
+
+        private Tile _focusedTile;
+        private Color _originalTileMenuColor;
+        private Color _focusedTileMenuColor;
+        
         [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject; //TODO might create its own special class for this
         
         private void Awake()
@@ -26,6 +33,17 @@ namespace Managers
 
         }
 
+        private void Start()
+        {
+            _focusedTileMenuColor = Color.red;
+            _focusedTileMenuColor.a = 0.7f;
+            
+            _originalTileMenuColor = _tileObject.GetComponent<Image>().color;
+            _originalTileMenuColor.a = 0.3254902f;
+            
+            
+        }
+
         public void ShowSelectedHero(BaseHero hero)
         {
             if (hero == null)
@@ -39,21 +57,97 @@ namespace Managers
 
         public void ShowTileInfo(Tile tile)
         {
-            if (tile == null)
-            {
-                _tileObject.SetActive(false); 
-                _tileUnitObject.SetActive(false); 
-                return;
-            }
            
-            _tileObject.GetComponentInChildren<TMP_Text>().text = tile.TileName;
-            _tileObject.SetActive(true);
 
-            if (tile.OccupiedUnit)
+            if (_focusedTile != null)
             {
-                _tileUnitObject.GetComponentInChildren<TMP_Text>().text = tile.OccupiedUnit.UnitName;
-                _tileUnitObject.SetActive(true);
+                _tileObject.GetComponentInChildren<TMP_Text>().text = _focusedTile.TileName;
+                _tileObject.GetComponent<Image>().color = _focusedTileMenuColor;
+                _tileObject.SetActive(true);
+
+                if (_focusedTile.OccupiedUnit)
+                {
+                    _tileUnitObject.GetComponentInChildren<TMP_Text>().text = _focusedTile.OccupiedUnit.UnitName;
+                    _tileUnitObject.GetComponent<Image>().color = _focusedTileMenuColor;
+                    _tileUnitObject.SetActive(true);
+                }
+                
+                else if (_focusedTile.OccupiedInteractable)
+                {
+                    _tileUnitObject.GetComponentInChildren<TMP_Text>().text = _focusedTile.OccupiedInteractable.Name;
+                    _tileUnitObject.GetComponent<Image>().color = _focusedTileMenuColor;
+                    _tileUnitObject.SetActive(true);
+                }
+                
+                
             }
+
+            else
+            {
+                
+                
+                if (tile == null)
+                {
+                    _tileObject.SetActive(false); 
+                    _tileUnitObject.SetActive(false); 
+                    return;
+                }
+                
+                _tileObject.GetComponentInChildren<TMP_Text>().text = tile.TileName;
+                _tileObject.SetActive(true);
+
+                if (tile.OccupiedUnit)
+                {
+                
+                    _tileUnitObject.GetComponentInChildren<TMP_Text>().text = tile.OccupiedUnit.UnitName;
+                    _tileUnitObject.SetActive(true);
+                }
+            }
+            
+           
+            
+        }
+
+        public void OnRightMouseDown(Tile focusedTile)
+        {
+            
+            
+            if (_focusedTile == null)
+            {
+                SetFocusedTile(focusedTile);
+                //StartCoroutine(_focusedTile.FlashTile());
+                //_focusedTile.SetFocusHighlightActive(true
+                //);
+                _focusedTile.IsFlashing = true;
+                StartCoroutine(_focusedTile.FlashTile());
+                
+                
+                return;
+                
+                
+            }
+
+            _focusedTile.IsFlashing = false;
+            StopCoroutine(_focusedTile.FlashTile());
+            _focusedTile.SetToOriginalColor();
+            //_focusedTile.SetFocusHighlightActive(false);
+            RemoveFocusedTile();
+           
+            
+        }
+        
+
+        private void SetFocusedTile(Tile focusedTile)
+        {
+            _focusedTile = focusedTile;
+          
+            //_tileObject.GetComponent<Image>().color = Color.red;
+        }
+
+        private void RemoveFocusedTile()
+        {
+            _tileObject.GetComponent<Image>().color = _originalTileMenuColor;
+            _focusedTile = null;
         }
         
         

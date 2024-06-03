@@ -72,6 +72,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4470263792070227399}
   m_SourcePrefab: {fileID: 100100000, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+--- !u!1 &4244893108792249594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847638094525061904, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+  m_PrefabInstance: {fileID: 3543076791500511210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5557288894014135377 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8950056947323636667, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
@@ -90,10 +95,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileName: Grasslands
+  _originalColor: {r: 0.105882354, g: 0.9137255, b: 0.09803922, a: 1}
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _renderer: {fileID: 7926493038302575258}
   _highlight: {fileID: 5992885907422149249}
+  _focusHighlight: {fileID: 4244893108792249594}
   _isWalkable: 1
   OccupiedUnit: {fileID: 0}
+  OccupiedInteractable: {fileID: 0}
   _baseColor: {r: 0.10625253, g: 0.9150943, b: 0.09927912, a: 1}
   _offsetColor: {r: 0.088365115, g: 0.6509434, b: 0.08290317, a: 1}
 --- !u!1 &5992885907422149249 stripped

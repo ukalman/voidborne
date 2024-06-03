@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Interaction;
 using Managers;
 using Units;
 using Units.Enemies;
@@ -12,12 +14,22 @@ namespace Tiles
     public abstract class Tile : MonoBehaviour
     {
         public string TileName;
-        
+
+
+        [SerializeField] protected Color _originalColor;
+        [SerializeField] private Color _flashColor = Color.red;
         [SerializeField] protected SpriteRenderer _renderer;
         [SerializeField] private GameObject _highlight;
+        [SerializeField] private GameObject _focusHighlight;
         [SerializeField] private bool _isWalkable;
 
         public BaseUnit OccupiedUnit;
+        public Interactable OccupiedInteractable;
+        
+        public bool IsFlashing = false; 
+        
+        // Add if it has an interactable on it
+        
         public bool Walkable => _isWalkable && OccupiedUnit == null; // We don't wanna go on a tile that is already occupied, and not walkable.
         
         public virtual void Init(int x, int y)
@@ -37,15 +49,42 @@ namespace Tiles
             MenuManager.Instance.ShowTileInfo(null);
         }
 
+        private void OnMouseOver()
+        {
+            // Check if the right mouse button is clicked while the cursor is over this tile
+            if (Input.GetMouseButtonDown(1))
+            {
+                OnRightMouseDown();
+            }
+        }
+
+        private void OnRightMouseDown()
+        {
+            Debug.Log("Yes, On right mouse down");
+            MenuManager.Instance.OnRightMouseDown(this);
+            MenuManager.Instance.ShowTileInfo(this);
+            
+           
+
+         
+         
+        }
+
         // MouseDown is only cared about when the GameState is Player's (Hero's) turn
         private void OnMouseDown()
         {
             if(GameManager.Instance.GameState != GameState.HeroesTurn) return;
 
-            // Means that there is 
+            // Means that there is a unit on the tile
             if (OccupiedUnit != null)
-            {
-                if (OccupiedUnit.Faction == Faction.Hero) UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
+            {   
+                Debug.Log(OccupiedUnit.UnitName);
+                Debug.Log(OccupiedUnit.Faction);
+                if (OccupiedUnit.Faction == Faction.Hero)
+                {
+                    Debug.Log("yes!");
+                    UnitManager.Instance.SetSelectedHero((BaseHero)OccupiedUnit);
+                }
                 else // TODO for now, else condition means an Enemy is selected, but change it later for friendly NPC's
                 {
                     if (UnitManager.Instance.SelectedHero != null)
@@ -74,30 +113,6 @@ namespace Tiles
                     }
                 }
                 
-                
-                    /*
-                    BaseHero selectedHero = UnitManager.Instance.SelectedHero;
-
-                    if (selectedHero != null && Walkable && !selectedHero.IsMoving && GridManager.Instance.AreTilesAdjacent(selectedHero.OccupiedTile.transform.position, transform.position))
-                    {
-                        StartCoroutine(selectedHero.MoveToTile(this, 0.5f));
-                    }
-                    */
-                    
-
-                    /* Older code
-                    if (UnitManager.Instance.SelectedHero != null && Walkable)
-                    {
-
-                        // Check if the selected tile is adjacent to the hero's current tile
-                        if (GridManager.Instance.AreTilesAdjacent(UnitManager.Instance.SelectedHero.OccupiedTile.transform.position, transform.position))
-                        {
-                            SetUnit(UnitManager.Instance.SelectedHero);
-                            //UnitManager.Instance.SetSelectedHero(null); // deselect
-                        }
-                        
-                    }
-                    */
             }
         }
 
@@ -108,5 +123,42 @@ namespace Tiles
             OccupiedUnit = unit;
             unit.OccupiedTile = this;
         }
+        
+        public IEnumerator FlashTile()
+        {
+            float flashDuration = 2f;  // Total duration for one complete flash cycle (to red and back to original color)
+            float halfFlashDuration = flashDuration / 2f;
+            while (IsFlashing)
+            {
+                // Interpolate to flash color
+                float elapsed = 0f;
+                while (elapsed < halfFlashDuration)
+                {
+                    _renderer.color = Color.Lerp(_originalColor, _flashColor, elapsed / halfFlashDuration);
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
+
+                // Interpolate back to original color
+                elapsed = 0f;
+                while (elapsed < halfFlashDuration)
+                {
+                    _renderer.color = Color.Lerp(_flashColor, _originalColor, elapsed / halfFlashDuration);
+                    elapsed += Time.deltaTime;
+                    yield return null;
+                }
+            }
+        }
+
+        public void SetToOriginalColor()
+        {
+            _renderer.color = _originalColor;
+        }
+        
+        public void SetFocusHighlightActive(bool activated)
+        {
+            _focusHighlight.SetActive(activated);
+        }
+        
     }
 }
