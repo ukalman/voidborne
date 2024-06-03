@@ -54,21 +54,20 @@ namespace Tiles
             // Check if the right mouse button is clicked while the cursor is over this tile
             if (Input.GetMouseButtonDown(1))
             {
-                OnRightMouseDown();
+                //OnRightMouseDown();
             }
         }
-
+        
+        /*
         private void OnRightMouseDown()
         {
             Debug.Log("Yes, On right mouse down");
-            MenuManager.Instance.OnRightMouseDown(this);
+            MenuManager.Instance.FocusToTile(this);
             MenuManager.Instance.ShowTileInfo(this);
             
-           
-
-         
-         
         }
+        
+        */
 
         // MouseDown is only cared about when the GameState is Player's (Hero's) turn
         private void OnMouseDown()
@@ -102,6 +101,8 @@ namespace Tiles
                 BaseHero selectedHero = UnitManager.Instance.SelectedHero;
                 if (selectedHero != null && Walkable && !selectedHero.IsMoving)
                 {
+                    Debug.Log("Yes you can move!");
+                    MenuManager.Instance.FocusToTile(this);
                     // A* Path Finding
                     Tile startTile = UnitManager.Instance.SelectedHero.OccupiedTile;
                     Tile endTile = this; 
@@ -112,6 +113,12 @@ namespace Tiles
                         StartCoroutine(UnitManager.Instance.SelectedHero.FollowPath(path));
                     }
                 }
+                
+                else if (selectedHero != null && selectedHero.IsMoving)
+                {
+                    StartCoroutine(UnitManager.Instance.SelectedHero.StopMovement());
+                }
+                
                 
             }
         }
@@ -126,7 +133,7 @@ namespace Tiles
         
         public IEnumerator FlashTile()
         {
-            float flashDuration = 2f;  // Total duration for one complete flash cycle (to red and back to original color)
+            float flashDuration = 1.5f;  // Total duration for one complete flash cycle (to red and back to original color)
             float halfFlashDuration = flashDuration / 2f;
             while (IsFlashing)
             {

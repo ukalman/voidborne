@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Managers;
 using Tiles;
 using UnityEngine;
 using Utilities;
@@ -23,6 +24,8 @@ namespace Units
         public int Focus { get; set; } // Enhances critical rate and aiming proficiency, crucial for a ranged fighter.
         
         public bool IsMoving { get; private set; }
+        
+        private Coroutine _currentMovementCoroutine;
 
         public virtual void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility,
             int charisma, int focus)
@@ -48,11 +51,13 @@ namespace Units
             {
                 if (tile != OccupiedTile) // Ensure the tile is not the one we're already on
                 {
-                    yield return StartCoroutine(MoveToTile(tile, 0.5f)); // Use the adjusted method that handles tile transition
+                    _currentMovementCoroutine = StartCoroutine(MoveToTile(tile, 0.5f)); // Store the coroutine reference
+                    yield return _currentMovementCoroutine; // Wait for the movement to complete
                 }
             }
 
             IsMoving = false;
+            MenuManager.Instance.DeFocusToTile();
         }
 
         // Move to a specific position (not so good)
@@ -93,7 +98,27 @@ namespace Units
             if (OccupiedTile != null) OccupiedTile.OccupiedUnit = null;
             OccupiedTile = targetTile;
             targetTile.OccupiedUnit = this;
-            IsMoving = false;
+            //IsMoving = false;
+        }
+        
+        public IEnumerator StopMovement()
+        {
+            if (IsMoving)
+            {
+                if (_currentMovementCoroutine != null)
+                {
+                    StopCoroutine(_currentMovementCoroutine);
+                    _currentMovementCoroutine = null;
+                }
+
+                yield return StartCoroutine(MoveToTile(OccupiedTile, 0.5f));
+                
+                IsMoving = false;
+                MenuManager.Instance.DeFocusToTile();
+            }
+            
+            
+           
         }
         
         

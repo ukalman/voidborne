@@ -44,6 +44,7 @@ namespace Managers
             
         }
 
+        
         public void ShowSelectedHero(BaseHero hero)
         {
             if (hero == null)
@@ -57,8 +58,31 @@ namespace Managers
 
         public void ShowTileInfo(Tile tile)
         {
-           
+            if (tile == null)
+            {
+                _tileObject.SetActive(false); 
+                _tileUnitObject.SetActive(false); 
+                return;
+            }
+                
+            _tileObject.GetComponentInChildren<TMP_Text>().text = tile.TileName;
+            _tileObject.SetActive(true);
 
+            if (tile.OccupiedUnit)
+            {
+                
+                _tileUnitObject.GetComponentInChildren<TMP_Text>().text = tile.OccupiedUnit.UnitName;
+                _tileUnitObject.SetActive(true);
+            }
+            
+            else if (tile.OccupiedInteractable)
+            {
+                _tileUnitObject.GetComponentInChildren<TMP_Text>().text = tile.OccupiedInteractable.Name;
+                _tileUnitObject.SetActive(true);
+            }
+            
+            
+            /*
             if (_focusedTile != null)
             {
                 _tileObject.GetComponentInChildren<TMP_Text>().text = _focusedTile.TileName;
@@ -103,38 +127,50 @@ namespace Managers
                     _tileUnitObject.SetActive(true);
                 }
             }
+            */
             
            
             
         }
 
-        public void OnRightMouseDown(Tile focusedTile)
+        public void FocusToTile(Tile focusedTile)
         {
             
             
             if (_focusedTile == null)
             {
                 SetFocusedTile(focusedTile);
-                //StartCoroutine(_focusedTile.FlashTile());
-                //_focusedTile.SetFocusHighlightActive(true
-                //);
+                StartCoroutine(_focusedTile.FlashTile());
+                _focusedTile.SetFocusHighlightActive(true);
                 _focusedTile.IsFlashing = true;
                 StartCoroutine(_focusedTile.FlashTile());
-                
-                
-                return;
-                
-                
+ 
             }
-
+        
+            /*
             _focusedTile.IsFlashing = false;
             StopCoroutine(_focusedTile.FlashTile());
-            _focusedTile.SetToOriginalColor();
+            //_focusedTile.SetToOriginalColor();
             //_focusedTile.SetFocusHighlightActive(false);
             RemoveFocusedTile();
-           
+            */
             
         }
+
+        public void DeFocusToTile()
+        {
+            if (_focusedTile)
+            {
+                _focusedTile.IsFlashing = false;
+                StopCoroutine(_focusedTile.FlashTile());
+                _focusedTile.SetToOriginalColor();
+                _focusedTile.SetFocusHighlightActive(false);
+                RemoveFocusedTile(); 
+            }
+            
+            
+        }
+        
         
 
         private void SetFocusedTile(Tile focusedTile)
@@ -146,7 +182,8 @@ namespace Managers
 
         private void RemoveFocusedTile()
         {
-            _tileObject.GetComponent<Image>().color = _originalTileMenuColor;
+            //_tileObject.GetComponent<Image>().color = _originalTileMenuColor;
+            //_tileUnitObject.GetComponent<Image>().color = _originalTileMenuColor;
             _focusedTile = null;
         }
         
