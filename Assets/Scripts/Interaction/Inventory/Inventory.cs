@@ -41,13 +41,10 @@ namespace Interaction
                     Debug.Log("Not enough room.");
                     return false;
                 }
+                
                 Items.Add(item);
-                if (OnItemChangedCallback != null)
-                {
-                    OnItemChangedCallback.Invoke();   
-                }
-                
-                
+
+                OnItemChangedCallback?.Invoke();
                 
                 return true;
             }

@@ -98,7 +98,7 @@ namespace Managers
         {
             GridManager.Instance.GenerateGrid();
             UnitManager.Instance.SpawnHeroes();
-            UnitManager.Instance.SpawnEnemies();
+            //UnitManager.Instance.SpawnEnemies();
             InteractableManager.Instance.SpawnItems();
             ChangeState(GameState.HeroesTurn);
         }

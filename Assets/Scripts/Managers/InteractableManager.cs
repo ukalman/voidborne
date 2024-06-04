@@ -31,7 +31,7 @@ namespace Managers
                 Destroy(gameObject);
             }
             
-            _items = Resources.LoadAll<Item>("Inventory/Items").ToList();
+            _items = Resources.LoadAll<Item>("Inventory/Items/Equipment").ToList();
             
           
         }
@@ -39,17 +39,23 @@ namespace Managers
         public void SpawnItems()
         {
             var itemCount = 2;
-            var sword1Prefab = GetItem("Gilan's Sword");
+            var sword1Prefab = GetItem("Dweemer Sword");
             var spawnedSword1 = Instantiate(sword1Prefab);
             var randomSword1SpawnTile = GridManager.Instance.GetItemSpawnTile();
             
             randomSword1SpawnTile.SetInteractable(spawnedSword1);
             
-            var helmet1Prefab = GetItem("Helmet of Protection");
+            var helmet1Prefab = GetItem("Sigmund's Helm");
             var spawnedHelmet1 = Instantiate(helmet1Prefab);
             var randomHelmet1SpawnTile = GridManager.Instance.GetItemSpawnTile();
             
             randomHelmet1SpawnTile.SetInteractable(spawnedHelmet1);
+            
+            var helmet2Prefab = GetItem("Orc Helmet");
+            var spawnedHelmet2 = Instantiate(helmet2Prefab);
+            var randomHelmet2SpawnTile = GridManager.Instance.GetItemSpawnTile();
+            
+            randomHelmet2SpawnTile.SetInteractable(spawnedHelmet2);
             
  
         }

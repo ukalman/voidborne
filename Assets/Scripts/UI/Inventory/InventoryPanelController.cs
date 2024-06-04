@@ -19,6 +19,13 @@ namespace UI.Inventory
             _inventory.OnItemChangedCallback += UpdateUI;
 
             _slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
+            
+            UpdateUI();
+        }
+
+        private void OnDestroy()
+        {
+            _inventory.OnItemChangedCallback -= UpdateUI;
         }
 
 

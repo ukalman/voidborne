@@ -16,6 +16,11 @@ namespace Interaction
             // Something might happen
             Debug.Log("Using " + ItemName);
         }
+
+        public void RemoveFromInventory()
+        {
+            Inventory.Instance.Remove(this);
+        }
         
         
     }

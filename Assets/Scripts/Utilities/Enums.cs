@@ -68,5 +68,15 @@ namespace Utilities
         Archer,
         Mage
     }
+
+    public enum EquipmentSlot
+    {
+        Head,
+        Chest,
+        Legs,
+        Weapon,
+        Shield,
+        Feet
+    }
     
 }

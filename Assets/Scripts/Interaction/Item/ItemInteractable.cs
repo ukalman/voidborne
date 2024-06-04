@@ -32,7 +32,7 @@ namespace Interaction
 
         protected override bool CheckIfInteractable()
         {
-            if (UnitManager.Instance.SelectedHero.OccupiedTile == this.OccupiedTile)
+            if (UnitManager.Instance.SelectedHero.OccupiedTile == OccupiedTile)
             {
                 return true;
             }
@@ -44,6 +44,7 @@ namespace Interaction
         {
             Debug.Log("Picking up " + Item.ItemName);
             bool wasPickedUp = Inventory.Instance.Add(Item);
+            InteractableManager.Instance.RemoveFocus();
 
             if (wasPickedUp)
             {
