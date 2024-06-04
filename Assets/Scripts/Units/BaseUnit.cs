@@ -84,11 +84,18 @@ namespace Units
             Vector3 startPosition = transform.position;
             Vector3 endPosition = targetTile.transform.position;
             bool isDiagonal = Mathf.Abs(targetTile.transform.position.x - startPosition.x) == Mathf.Abs(targetTile.transform.position.y - startPosition.y);
-            float duration = isDiagonal ? baseDuration * 1.414f  : baseDuration; // Diagonal movements are longer by the factor of sqrt(2)
+            float duration = isDiagonal ? baseDuration * 1.414f : baseDuration; // Diagonal movements are longer by the factor of sqrt(2)
             float elapsed = 0;
 
             while (elapsed < duration)
             {
+                // PAUSE CONTROL
+                if (GameManager.Instance.GameState == GameState.Inventory || GameManager.Instance.GameState == GameState.Pause)
+                {
+                    yield return new WaitWhile(() => GameManager.Instance.GameState == GameState.Inventory || GameManager.Instance.GameState == GameState.Pause);
+                }
+                
+
                 transform.position = Vector3.MoveTowards(startPosition, endPosition, elapsed / duration);
                 elapsed += Time.deltaTime;
                 yield return null;

@@ -75,6 +75,8 @@ namespace Managers
                 case GameState.SpawnEnemies:
                     UnitManager.Instance.SpawnEnemies();
                     break;
+                case GameState.Inventory:
+                    break;
                 case GameState.HeroesTurn:
                     break;
                 case GameState.EnemiesTurn:

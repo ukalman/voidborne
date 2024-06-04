@@ -5,6 +5,7 @@ using Units.Heroes;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Utilities;
 
 namespace Managers
 {
@@ -18,6 +19,8 @@ namespace Managers
         private Color _focusedTileMenuColor;
         
         [SerializeField] private GameObject _selectedHeroObject, _tileObject, _tileUnitObject; //TODO might create its own special class for this
+
+        public bool InventoryOpen;
         
         private void Awake()
         {
@@ -44,6 +47,40 @@ namespace Managers
             
         }
 
+        private void Update()
+        {
+            CheckInventoryPanel();
+        }
+
+        private void CheckInventoryPanel()
+        {
+            GameState gameState = GameManager.Instance.GameState;
+
+            if (Input.GetKeyDown("i"))
+            {
+                if (gameState == GameState.HeroesTurn || gameState == GameState.Gameplay || gameState == GameState.Inventory)
+                {
+                    if (!InventoryOpen)
+                    {
+                        UIManager.Instance.OpenInventoryPanel();
+                        InventoryOpen = true;
+                        GameManager.Instance.GameState = GameState.Inventory;
+                        return;
+                    }
+                    
+                    //Debug.Log("YAYYYYYYYYYYYYYYY");
+                    
+                    UIManager.Instance.CloseInventoryPanel();
+                    InventoryOpen = false;
+                    GameManager.Instance.GameState = GameState.HeroesTurn;
+                    
+                } 
+            }
+            
+            
+            
+        }
+        
         
         public void ShowSelectedHero(BaseHero hero)
         {

@@ -10,5 +10,13 @@ namespace Interaction
         public bool isDefaultItem = false;
         public ItemInteractable ItemPrefab;
 
+        public virtual void Use()
+        {
+            // Use the item
+            // Something might happen
+            Debug.Log("Using " + ItemName);
+        }
+        
+        
     }
 }

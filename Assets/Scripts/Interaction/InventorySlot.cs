@@ -1,27 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using Interaction;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour
+namespace Interaction
 {
-    public Image Icon;
-    
-    private Item _item;
-
-    public void AddItem(Item newItem)
+    public class InventorySlot : MonoBehaviour
     {
-        _item = newItem;
+        public Image Icon;
+        public Button removeButton;
+        
+        private Item _item;
 
-        Icon.sprite = _item.icon;
-        Icon.enabled = true;
-    }
+        public void AddItem(Item newItem)
+        {
+            _item = newItem;
+            Debug.Log("New Item's name: " + newItem.name);
+            Debug.Log("Item's name: " + _item.name);
+            
+            if(_item.icon == null) Debug.Log("Yes, item's icon is null.");
+            
+            Icon.sprite = _item.icon;
+            Icon.enabled = true;
+            removeButton.interactable = true;
+        }
 
-    public void ClearSlot()
-    {
-        _item = null;
-        Icon.sprite = null;
-        Icon.enabled = false;
+        public void ClearSlot()
+        {
+            _item = null;
+            Icon.sprite = null;
+            Icon.enabled = false;
+            removeButton.interactable = false;
+        }
+
+        public void OnRemoveButton()
+        {
+            Inventory.Instance.Remove(_item);
+        }
+
+        public void UseItem()
+        {
+            if (_item != null)
+            {
+                _item.Use();
+            }
+        }
+        
     }
 }

@@ -7,6 +7,7 @@ namespace Utilities
         Settings,
         CharacterCreation,
         Level,
+        Inventory,
         Pause,
         Win,
         Lose
@@ -23,6 +24,7 @@ namespace Utilities
         Gameplay,
         SpawnHeroes,
         SpawnEnemies,
+        Inventory,
         HeroesTurn,
         EnemiesTurn,
         LevelEnd,

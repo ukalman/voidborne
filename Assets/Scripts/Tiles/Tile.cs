@@ -39,18 +39,23 @@ namespace Tiles
 
         private void OnMouseEnter()
         {
+            if(MenuManager.Instance.InventoryOpen) return;
+            
             _highlight.SetActive(true);
             MenuManager.Instance.ShowTileInfo(this);
         }
 
         private void OnMouseExit()
         {
+            if(MenuManager.Instance.InventoryOpen) return;
+            
             _highlight.SetActive(false);
             MenuManager.Instance.ShowTileInfo(null);
         }
 
         private void OnMouseOver()
         {
+            if(MenuManager.Instance.InventoryOpen) return;
             // Check if the right mouse button is clicked while the cursor is over this tile
             if (Input.GetMouseButtonDown(1))
             {
@@ -72,6 +77,8 @@ namespace Tiles
         // MouseDown is only cared about when the GameState is Player's (Hero's) turn
         private void OnMouseDown()
         {
+            if(MenuManager.Instance.InventoryOpen) return;
+            
             if(GameManager.Instance.GameState != GameState.HeroesTurn) return;
 
             // Means that there is a unit on the tile
@@ -112,7 +119,6 @@ namespace Tiles
                         InteractableManager.Instance.SetFocus(OccupiedInteractable);
                     }
                     
-                    Debug.Log("Yes you can move!");
                     MenuManager.Instance.FocusToTile(this);
                     // A* Path Finding
                     Tile startTile = UnitManager.Instance.SelectedHero.OccupiedTile;
@@ -153,6 +159,7 @@ namespace Tiles
         
         public IEnumerator FlashTile()
         {
+            
             float flashDuration = 1.5f;  // Total duration for one complete flash cycle (to red and back to original color)
             float halfFlashDuration = flashDuration / 2f;
             while (IsFlashing)

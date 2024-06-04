@@ -61,6 +61,16 @@ namespace Managers
             CoreUISignals.Instance.OnOpenPanel?.Invoke(UIPanelTypes.CharacterCreation, 0);
         }
 
+        public void OpenInventoryPanel()
+        {
+            CoreUISignals.Instance.OnOpenPanel?.Invoke(UIPanelTypes.Inventory,1);
+        }
+        
+        public void CloseInventoryPanel()
+        {
+            CoreUISignals.Instance.OnClosePanel?.Invoke(1);
+        }
+
         
         
         

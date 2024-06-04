@@ -21,6 +21,7 @@ namespace UI.Inventory
             _slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
         }
 
+
         void UpdateUI()
         {
             for (int i = 0; i < _slots.Length; i++)
