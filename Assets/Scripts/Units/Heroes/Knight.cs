@@ -5,12 +5,6 @@ namespace Units.Heroes
 {
     public class Knight : BaseHero
     {
-        private void Awake()
-        {
-            Health = 10;
-            Strength = 2;
-            Armor = 2;
-        }
         /*
          * Health: High — Knights are frontline fighters and need substantial health.
          * Armor: High — Essential for withstanding attacks in melee combat.
@@ -27,7 +21,6 @@ namespace Units.Heroes
             int focus)
         {
             base.SetAttributes(strength, armor, power, intelligence, dexterity, agility, charisma, focus);
-            Health = 100;
             Debug.Log("Knight attributes set!");
         }
     }

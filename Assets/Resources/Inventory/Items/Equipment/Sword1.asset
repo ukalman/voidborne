@@ -19,3 +19,9 @@ MonoBehaviour:
   EquipSlot: 3
   ArmorModifier: 0
   DamageModifier: 5
+  PowerModifier: 0
+  IntelligenceModifier: 0
+  DexterityModifier: 0
+  AgilityModifier: 0
+  CharismaModifier: 1
+  FocusModifier: 0

@@ -22,14 +22,14 @@ namespace Data
             if (hero != null)
             {
                 // HeroType = hero.HeroType;  // Assuming HeroType is a field you want to serialize
-                Strength = hero.Strength;
-                Armor = hero.Armor;
-                Power = hero.Power;
-                Intelligence = hero.Intelligence;
-                Dexterity = hero.Dexterity;
-                Agility = hero.Agility;
-                Charisma = hero.Charisma;
-                Focus = hero.Focus;
+                Strength = hero.Strength.GetValue();
+                Armor = hero.Armor.GetValue();
+                Power = hero.Power.GetValue();
+                Intelligence = hero.Intelligence.GetValue();
+                Dexterity = hero.Dexterity.GetValue();
+                Agility = hero.Agility.GetValue();
+                Charisma = hero.Charisma.GetValue();
+                Focus = hero.Focus.GetValue();
             }
         }
 

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Managers;
+using Stats;
 using Tiles;
 using UnityEngine;
 using Utilities;
@@ -13,6 +15,20 @@ namespace Units
         public Tile OccupiedTile;
         public Faction Faction;
         
+        
+        public int  MaxHealth = 100; // Total vitality
+        public int CurrentHealth { get; private set; }
+        
+        public Stat Strength; //  Directly impacts their melee damage output.
+        public Stat Armor; //  Essential for withstanding attacks in melee combat.
+        public Stat Power; //  Increases spell damage and critical spell effects.
+        public Stat Intelligence;
+        public Stat Dexterity; //  Improves precision, critical strikes, and lockpicking abilities.
+        public Stat Agility; // Increases dodging capabilities, essential for a character who might wear lighter armor.
+        public Stat Charisma; // Useful for manipulating NPCs or bartering with traders using magical artifacts.
+        public Stat Focus; // Enhances critical rate and aiming proficiency, crucial for a ranged fighter.
+        
+        /*
         public int Health { get; set; } // Total vitality 
         public int Armor { get; set; } //  Essential for withstanding attacks in melee combat.
         public int Strength { get; set; } //  Directly impacts their melee damage output.
@@ -22,22 +38,35 @@ namespace Units
         public int Agility { get; set; } // Increases dodging capabilities, essential for a character who might wear lighter armor.
         public int Charisma { get; set; } // Useful for manipulating NPCs or bartering with traders using magical artifacts.
         public int Focus { get; set; } // Enhances critical rate and aiming proficiency, crucial for a ranged fighter.
-        
+        */
         public bool IsMoving { get; private set; }
         
         private Coroutine _currentMovementCoroutine;
 
+        private void Awake()
+        {
+            CurrentHealth = MaxHealth;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                TakeDamage(10);
+            }
+        }
+
         public virtual void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility,
             int charisma, int focus)
         {
-            Strength = strength;
-            Armor = armor;
-            Power = power;
-            Intelligence = intelligence;
-            Dexterity = dexterity;
-            Agility = agility;
-            Charisma = charisma;
-            Focus = focus;
+            Strength.SetValue(strength);
+            Armor.SetValue(armor);
+            Power.SetValue(power);
+            Intelligence.SetValue(intelligence);
+            Dexterity.SetValue(dexterity);
+            Agility.SetValue(agility);
+            Charisma.SetValue(charisma);
+            Focus.SetValue(focus);
         }
         
         
@@ -123,31 +152,48 @@ namespace Units
                 IsMoving = false;
                 MenuManager.Instance.DeFocusToTile();
             }
-            
-            
-           
+
         }
         
         
         public virtual void Attack(BaseUnit target)
         {
             // Implement generic attack logic here
-            target.Health -= this.Strength - target.Armor;
-            target.DeathControl();
+            target.TakeDamage(Strength.GetValue());
+            //target.CurrentHealth -= this.Strength.GetValue() - target.Armor.GetValue();
+            //target.DeathControl();
             // Example: target.Health -= this.Strength * this.weapon.damage - target.Armor;
+        }
+        
+        public void TakeDamage(int damage)
+        {
+            damage -= Armor.GetValue();
+            damage = Mathf.Clamp(damage, 0, int.MaxValue);
+            
+            CurrentHealth -= damage;
+            Debug.Log(transform.name + " takes " + damage + " damage.");
+            DeathControl();
+            
         }
 
 
         public void DeathControl()
         {
-            Debug.Log(this.UnitName + " Health: " + this.Health);
-            if (this.Health <= 0)
+            Debug.Log(this.UnitName + " Health: " + CurrentHealth);
+            if (CurrentHealth <= 0)
             {
                 Debug.Log(this.UnitName + " is dead");
                 Destroy(this);
+                Die();
             }
         }
-        
-        
+
+        public virtual void Die()
+        {
+            Debug.Log(transform.name + " died.");
+            
+        }
+
+
     }
 }
