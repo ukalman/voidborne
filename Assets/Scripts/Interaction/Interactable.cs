@@ -13,7 +13,7 @@ namespace Interaction
 
         private bool _hasInteracted = false;
         
-        private void Update()
+        public virtual void Update()
         {
             if (_isFocus && !_hasInteracted)
             {
@@ -27,7 +27,7 @@ namespace Interaction
 
         public virtual void Interact()
         {
-            Debug.Log("Interacting with player!");
+            Debug.Log("Player is interacting with " + Name);
         }
         
         protected virtual bool CheckIfInteractable()

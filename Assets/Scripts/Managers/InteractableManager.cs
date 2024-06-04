@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using Interaction;
+using Units;
 using UnityEngine;
 
 namespace Managers
 {
     public class InteractableManager : MonoBehaviour
     {
+        
+        public Interactable Focus;
+        
         public static InteractableManager Instance { get; private set; }
 
         private List<Interactable> _interactables;
@@ -51,10 +55,33 @@ namespace Managers
         }
         
         
-        private ItemPickup GetItem(string itemName)
+        private ItemInteractable GetItem(string itemName)
         {
             // go through the list (_units), we want all of the units according to the faction that we want, we randomly shuffle them, then select the first one and return its prefab
             return _items.Where(u => u.ItemName.Equals(itemName)).ToList().First().ItemPrefab;
+        }
+        
+        public void SetFocus(Interactable newFocus)
+        {
+            if (newFocus != Focus)
+            {
+                if (Focus != null)
+                {
+                    Focus.OnDeFocused(); 
+                }
+                
+                Focus = newFocus;
+            }
+            
+            
+            newFocus.OnFocused();
+        }
+
+        public void RemoveFocus()
+        {
+            if (Focus != null)
+                Focus.OnDeFocused();
+            Focus = null;
         }
         
     }

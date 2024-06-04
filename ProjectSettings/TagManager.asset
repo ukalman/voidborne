@@ -45,3 +45,6 @@ TagManager:
   - name: Item PickUp
     uniqueID: 359426439
     locked: 0
+  - name: Panels
+    uniqueID: 3226288241
+    locked: 0

@@ -1,8 +1,9 @@
+using Managers;
 using UnityEngine;
 
 namespace Interaction
 {
-    public class ItemPickup : Interactable
+    public class ItemInteractable : Interactable
     {
         public Item Item;
 
@@ -16,8 +17,9 @@ namespace Interaction
             startPosition = transform.position;  // Store the initial position of the item
         }
 
-        private void Update()
+        public override void Update()
         {
+            base.Update();
             // Calculate the new position using a sine wave
             float newX = startPosition.x + Mathf.Sin(Time.time * frequency) * amplitude;
             transform.position = new Vector3(newX, startPosition.y, startPosition.z);
@@ -26,6 +28,16 @@ namespace Interaction
         public override void Interact()
         {
             PickUp();
+        }
+
+        protected override bool CheckIfInteractable()
+        {
+            if (UnitManager.Instance.SelectedHero.OccupiedTile == this.OccupiedTile)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         void PickUp()

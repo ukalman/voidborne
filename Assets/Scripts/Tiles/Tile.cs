@@ -101,6 +101,17 @@ namespace Tiles
                 BaseHero selectedHero = UnitManager.Instance.SelectedHero;
                 if (selectedHero != null && Walkable && !selectedHero.IsMoving)
                 {
+                    if (InteractableManager.Instance.Focus != null)
+                    {
+                        InteractableManager.Instance.RemoveFocus();
+                    }
+                    
+                    
+                    if (OccupiedInteractable != null)
+                    {
+                        InteractableManager.Instance.SetFocus(OccupiedInteractable);
+                    }
+                    
                     Debug.Log("Yes you can move!");
                     MenuManager.Instance.FocusToTile(this);
                     // A* Path Finding

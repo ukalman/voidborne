@@ -8,7 +8,7 @@ namespace Interaction
         public string ItemName = "New Item";
         public Sprite icon = null;
         public bool isDefaultItem = false;
-        public ItemPickup ItemPrefab;
+        public ItemInteractable ItemPrefab;
 
     }
 }
