@@ -50,7 +50,7 @@ namespace Managers
 
             }
             
-            GameManager.Instance.ChangeState(GameState.SpawnEnemies);
+            //GameManager.Instance.ChangeState(GameState.SpawnEnemies);
         }
         
         // TODO Make this and SpawnHeroes generic functions
@@ -72,7 +72,7 @@ namespace Managers
                 .Where(enemy => enemy != null)
                 .ToList();
             
-            GameManager.Instance.ChangeState(GameState.HeroesTurn);
+            //GameManager.Instance.ChangeState(GameState.HeroesTurn);
         }
 
         private T GetRandomUnit<T>(Faction faction) where T : BaseUnit

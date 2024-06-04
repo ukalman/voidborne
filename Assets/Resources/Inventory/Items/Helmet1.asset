@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4ebdeecfef4d04808e16dcdefd2aea, type: 3}
+  m_Name: Helmet1
+  m_EditorClassIdentifier: 
+  ItemName: Helmet of Protection
+  icon: {fileID: 21300000, guid: 7f51c824f0f271e4c9c6da6d2f023f11, type: 3}
+  isDefaultItem: 0
+  ItemPrefab: {fileID: 7106170837396658169, guid: 9677d8943c403574ebd56a5f9968cc27, type: 3}

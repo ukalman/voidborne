@@ -130,6 +130,15 @@ namespace Tiles
             OccupiedUnit = unit;
             unit.OccupiedTile = this;
         }
+
+        public void SetInteractable(Interactable interactable)
+        {
+            if (interactable.OccupiedTile != null) interactable.OccupiedTile.OccupiedInteractable = null;
+            interactable.transform.position = transform.position;
+            OccupiedInteractable = interactable;
+            interactable.OccupiedTile = this;
+        }
+        
         
         public IEnumerator FlashTile()
         {

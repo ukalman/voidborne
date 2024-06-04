@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Interaction;
 using UnityEngine;
 using Utilities;
 
@@ -24,7 +25,7 @@ namespace Managers
         private void Start()
         {
             //ChangeState(GameState.Start);
-            ChangeState(GameState.GenerateGrid);
+            ChangeState(GameState.LevelPrep);
         }
         
         /*
@@ -64,6 +65,7 @@ namespace Managers
                     ChangeState(GameState.HeroesTurn);
                     break;
                 case GameState.LevelPrep:
+                    LevelPreparation();
                     break;
                 case GameState.Gameplay:
                     break;
@@ -89,6 +91,16 @@ namespace Managers
                     throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
             }
         }
+
+        private void LevelPreparation()
+        {
+            GridManager.Instance.GenerateGrid();
+            UnitManager.Instance.SpawnHeroes();
+            UnitManager.Instance.SpawnEnemies();
+            InteractableManager.Instance.SpawnItems();
+            ChangeState(GameState.HeroesTurn);
+        }
+        
         
         
         
