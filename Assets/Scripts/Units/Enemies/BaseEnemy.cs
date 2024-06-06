@@ -18,6 +18,8 @@ namespace Units.Enemies
         
         private void Update()
         {
+            if (GameManager.Instance.GameState != GameState.EnemiesTurn) return;
+
             // Find player GameObject using its tag
             Player = GameObject.FindGameObjectWithTag("Player");
 
@@ -36,6 +38,10 @@ namespace Units.Enemies
                     //AlertState = true;
                     Debug.Log("ALERT!");
                     StartCoroutine(FollowPathAndNotify(enemy.FollowPath(pathToPlayer)));
+                }
+                else
+                {
+                    GameManager.Instance.ChangeState(GameState.HeroesTurn);
                 }
             }
         }
@@ -65,7 +71,7 @@ namespace Units.Enemies
         {
             yield return StartCoroutine(pathCoroutine);
             Debug.Log("done");
-            GameManager.Instance.ChangeState(GameState.Battle);
+            GameManager.Instance.ChangeState(GameState.Battle); // Change back to hero's turn after enemy move
         }
     }
 }

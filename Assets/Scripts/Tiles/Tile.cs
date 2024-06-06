@@ -97,8 +97,9 @@ namespace Tiles
                     {
                         var enemy = (BaseEnemy)OccupiedUnit;
                         // TODO Attack logic?? Maybe UnitManager.Instance.SelectedHero.Attack(enemy) or enemy.TakeDamage()
-                        Destroy(enemy.gameObject); // Temporary solution (just destroy the enemy)
+                        UnitManager.Instance.SelectedHero.Attack(enemy);
                         UnitManager.Instance.SetSelectedHero(null); // deselect 
+                        GameManager.Instance.ChangeState(GameState.EnemiesTurn); // Change to enemy's turn after attack)
                     }
                 }
             }
@@ -136,7 +137,8 @@ namespace Tiles
                     StartCoroutine(UnitManager.Instance.SelectedHero.StopMovement());
                 }
                 
-                
+                GameManager.Instance.ChangeState(GameState.EnemiesTurn); // Change to enemy's turn after move)
+
             }
         }
 

@@ -76,10 +76,13 @@ namespace Managers
                     UnitManager.Instance.SpawnEnemies();
                     break;
                 case GameState.Inventory:
+                    Debug.Log("Inventory Turn");
                     break;
                 case GameState.HeroesTurn:
+                    Debug.Log("Heroes Turn");
                     break;
                 case GameState.EnemiesTurn:
+                    Debug.Log("Enemies Turn");
                     break;
                 case GameState.LevelEnd:
                     break;
@@ -98,9 +101,21 @@ namespace Managers
         {
             GridManager.Instance.GenerateGrid();
             UnitManager.Instance.SpawnHeroes();
-            //UnitManager.Instance.SpawnEnemies();
+            UnitManager.Instance.SpawnEnemies();
             InteractableManager.Instance.SpawnItems();
             ChangeState(GameState.HeroesTurn);
+        }
+        
+        public void EndTurn()
+        {
+            if (GameState == GameState.HeroesTurn)
+            {
+                ChangeState(GameState.EnemiesTurn);
+            }
+            else if (GameState == GameState.EnemiesTurn)
+            {
+                ChangeState(GameState.HeroesTurn);
+            }
         }
         
         
