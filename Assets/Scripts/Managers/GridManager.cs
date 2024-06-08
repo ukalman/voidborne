@@ -23,7 +23,7 @@ namespace Managers
         [SerializeField] private Transform _tilesParent;  
         
         private Dictionary<Vector2, Tile> _tiles; // key is position, value is the Tile itself
-        private Dictionary<Vector2, PathNode> _pathNodes;
+        [SerializeField] private Dictionary<Vector2, PathNode> _pathNodes;
         
         private void Awake()
         {

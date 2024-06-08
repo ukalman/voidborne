@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3543076791500511210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6857582545189481840, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857582545189481840, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857582545189481840, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6857582545189481840, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8334434349205085474, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8950056947323636667, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      propertyPath: m_Name
+      value: FloorTile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8950056947323636667, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3302828222970822502}
+  m_SourcePrefab: {fileID: 100100000, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+--- !u!1 &4244893108792249594 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 847638094525061904, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+  m_PrefabInstance: {fileID: 3543076791500511210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5557288894014135377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8950056947323636667, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+  m_PrefabInstance: {fileID: 3543076791500511210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3302828222970822502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557288894014135377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c2465f9ae87413eb047083fc5e2e3fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileName: Floor
+  _originalColor: {r: 0, g: 0, b: 0, a: 0}
+  _flashColor: {r: 1, g: 0, b: 0, a: 1}
+  _renderer: {fileID: 7926493038302575258}
+  _highlight: {fileID: 5992885907422149249}
+  _focusHighlight: {fileID: 4244893108792249594}
+  _isWalkable: 1
+  OccupiedUnit: {fileID: 0}
+  OccupiedInteractable: {fileID: 0}
+  IsFlashing: 0
+  possibleSprites:
+  - {fileID: 21300000, guid: 62ce04cf2fd78444794fd64410568f61, type: 3}
+  - {fileID: 21300000, guid: 900041fe6e1639a4296afe3d42b2c535, type: 3}
+  - {fileID: 21300000, guid: e08c8dcfb920ab9419458dc2a051e7bd, type: 3}
+  - {fileID: 21300000, guid: 0c65732fbd59d114b8e56ced6bac79fc, type: 3}
+  - {fileID: 21300000, guid: d9b5498daa6717840acd77838856fb2e, type: 3}
+  - {fileID: 21300000, guid: a453c49a79eec5a4c9de960a5b7a4b27, type: 3}
+  - {fileID: 21300000, guid: 7e14d2b466cb28f4cb3007d01e66905f, type: 3}
+  - {fileID: 21300000, guid: 4dd0210574329fd4f8a1d903dd00c7ed, type: 3}
+  - {fileID: 21300000, guid: 9421d85c7da69124389aeac7a46a8633, type: 3}
+  - {fileID: 21300000, guid: b3b0d976d1bccdd4a9bdb3ddf7ccb392, type: 3}
+  - {fileID: 21300000, guid: 27e07e73336e0a248950c592ba41ab6a, type: 3}
+  - {fileID: 21300000, guid: d80a21deedab0084a827508b79e85e97, type: 3}
+  - {fileID: 21300000, guid: c29fad417aad5064c9cff0e0dbc52be3, type: 3}
+  - {fileID: 21300000, guid: 3a08e73fe4b39294885097a96d370f4f, type: 3}
+  - {fileID: 21300000, guid: d7443d165e60a8a4792a864fe5599407, type: 3}
+  - {fileID: 21300000, guid: 697936db735d9b5489a0fb57ff0d8d12, type: 3}
+  - {fileID: 21300000, guid: 53da6e6bbddf6e549b081b5563327b71, type: 3}
+--- !u!1 &5992885907422149249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7061794207954300267, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+  m_PrefabInstance: {fileID: 3543076791500511210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &7926493038302575258 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6857582545189481840, guid: 857732eb539c49d4f87886249ec85f81, type: 3}
+  m_PrefabInstance: {fileID: 3543076791500511210}
+  m_PrefabAsset: {fileID: 0}

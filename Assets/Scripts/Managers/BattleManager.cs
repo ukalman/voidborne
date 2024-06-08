@@ -40,15 +40,17 @@ namespace Managers
 
         public IEnumerator PlayerTurn()
         {
+            Debug.Log("Player's Turn");
             Player.Attack(Enemy);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             GameManager.Instance.EndTurn();
         }
 
         public IEnumerator EnemyTurn()
         {
+            Debug.Log("Enemy's Turn");
             Enemy.Attack(Player);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(3);
             GameManager.Instance.EndTurn();
         }
     }

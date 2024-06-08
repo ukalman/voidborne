@@ -16,6 +16,7 @@ namespace Managers
 
         private List<ScriptableUnit> _units;
         
+        [SerializeField]
         public List<BaseEnemy> _enemies;
 
         public BaseHero SelectedHero;

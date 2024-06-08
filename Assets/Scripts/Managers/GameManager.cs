@@ -99,10 +99,10 @@ namespace Managers
 
         private void LevelPreparation()
         {
-            GridManager.Instance.GenerateGrid();
-            UnitManager.Instance.SpawnHeroes();
-            UnitManager.Instance.SpawnEnemies();
-            InteractableManager.Instance.SpawnItems();
+            //GridManager.Instance.GenerateGrid();
+            //UnitManager.Instance.SpawnHeroes();
+            //UnitManager.Instance.SpawnEnemies();
+            //InteractableManager.Instance.SpawnItems();
             ChangeState(GameState.HeroesTurn);
         }
         
