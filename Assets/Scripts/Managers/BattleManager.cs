@@ -147,7 +147,7 @@ namespace Managers
             if (isDead)
             {
                 State = BattleState.WON;
-                EndBattle();
+                StartCoroutine(EndBattle());
             }
             else
             {
@@ -187,7 +187,7 @@ namespace Managers
             if (isDead)
             {
                 State = BattleState.LOST;
-                EndBattle();
+                StartCoroutine(EndBattle());
             }
             else
             {
@@ -198,7 +198,7 @@ namespace Managers
             
         }
 
-        void EndBattle()
+        IEnumerator EndBattle()
         {
             if (State == BattleState.WON)
             {
@@ -207,6 +207,11 @@ namespace Managers
             {
                 DialogueText = "You are defeated! Game Over!";
             }
+
+            yield return new WaitForSeconds(2f);
+            
+            UIManager.Instance.CloseInventoryPanel();
+            GameManager.Instance.ChangeState(GameState.Gameplay);
         }
     }
 }

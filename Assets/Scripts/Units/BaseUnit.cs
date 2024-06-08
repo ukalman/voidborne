@@ -180,7 +180,7 @@ namespace Units
         public virtual int Attack(BaseUnit target)
         {
             // Implement generic attack logic here
-            return target.TakeDamage(Strength.GetValue() * 1.5f + Power.GetValue() * 1.5f + Focus.GetValue() * 1.5f);
+            return target.TakeDamage((int)(Strength.GetValue() * 1.5f + Power.GetValue() * 1.5f + Focus.GetValue() * 1.5f));
             //target.CurrentHealth -= this.Strength.GetValue() - target.Armor.GetValue();
             //target.DeathControl();
             // Example: target.Health -= this.Strength * this.weapon.damage - target.Armor;

@@ -53,19 +53,20 @@ namespace Managers
             */
 
             
+            /*
             var heroPrefab = GetBaseHero(UnitType.Knight, 10, 10, 10, 10, 10, 10, 10, 10);
             var spawnedHero = Instantiate(heroPrefab);
             var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
             
             randomSpawnTile.SetUnit(spawnedHero);
+            */
             
         
-            /*
+            
             var spawnedHero = Instantiate(DataManager.Instance.Hero);
             var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
             
             randomSpawnTile.SetUnit(spawnedHero);
-            */
 
 
             //GameManager.Instance.ChangeState(GameState.SpawnEnemies);
