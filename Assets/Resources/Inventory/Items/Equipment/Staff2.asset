@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2449df3a74d14c9fb2b9fd4c6017a338, type: 3}
+  m_Name: Staff2
+  m_EditorClassIdentifier: 
+  ItemName: Hermaus Mora's Staff
+  icon: {fileID: 21300000, guid: 1ced505407e0f2e44abd4aade05fbaba, type: 3}
+  isDefaultItem: 0
+  ItemPrefab: {fileID: 7106170837396658169, guid: e19f20defb4a696499da2f149198a331, type: 3}
+  EquipSlot: 4
+  ArmorModifier: 0
+  DamageModifier: 1
+  PowerModifier: 9
+  IntelligenceModifier: 4
+  DexterityModifier: 0
+  AgilityModifier: 0
+  CharismaModifier: -3
+  FocusModifier: 0

@@ -1,24 +1,42 @@
+using System;
 using System.Collections;
 using System.Linq;
+using UI.Battle;
 using Units;
 using Units.Enemies;
+using Units.Heroes;
 using UnityEngine;
+using Utilities;
 
 namespace Managers
 {
+    
+    public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST}
+    
     public class BattleManager : MonoBehaviour
     {
         public static BattleManager Instance { get; private set; }
 
-        // Attributes
-        // selected hero
-        public BaseUnit Player;
+        public BattleState State;
         
-        // enemy (or enemies)
-        public BaseUnit Enemy;
         
-        // isBattleOver
+        public GameObject PlayerPrefab;
+        public GameObject EnemyPrefab;
         
+        public BaseHero PlayerUnit;
+        public BaseEnemy EnemyUnit;
+
+        public string DialogueText;
+        
+        public BattlePanelController PanelController;
+        
+        public delegate void OnBattleInitiated(BaseEnemy enemyUnit);
+    
+        public OnBattleInitiated onBattleInitiated;
+        
+        public delegate void OnBattlePanelCreated(BattlePanelController controller);
+    
+        public OnBattlePanelCreated onBattlePanelCreated;
         
         private void Awake()
         {
@@ -31,38 +49,69 @@ namespace Managers
             {
                 Destroy(gameObject);
             }
-
-           
+            
         }
 
-        public IEnumerator InitiateBattle()
+        private void Start()
         {
-            // battle logic vs vs.
-            // calls hero's and enemy's Attack functions respectively
-            Debug.Log("Battle!");
-            
-            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseUnit>();
-            Enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<BaseUnit>();
 
-            while (Player != null && Enemy != null)
-            {
-                yield return StartCoroutine(PlayerTurn());
-                yield return StartCoroutine(EnemyTurn());
-            }
-            
-            yield return null;
+            DataManager.onPlayerCreated += OnPlayerCreated;
+            onBattlePanelCreated += SetPanel;
+            onBattleInitiated += InitiateBattle;
         }
 
-        public IEnumerator PlayerTurn()
+        private void OnDestroy()
         {
-            Player.Attack(Enemy);
-            yield return new WaitForSeconds(1);
+            DataManager.onPlayerCreated -= OnPlayerCreated;
+            onBattlePanelCreated -= SetPanel;
+            onBattleInitiated -= InitiateBattle;
+        }
+
+        void OnPlayerCreated()
+        {
+            PlayerUnit = DataManager.Instance.Hero;
+            PlayerPrefab = PlayerUnit.gameObject;
+        }
+
+        void SetPanel(BattlePanelController controller)
+        {
+            PanelController = controller;
         }
         
-        public IEnumerator EnemyTurn()
+        void InitiateBattle(BaseEnemy enemyUnit)
         {
-            Enemy.Attack(Player);
-            yield return new WaitForSeconds(1);
+
+            StartCoroutine(SetupBattle(enemyUnit));
+
         }
+
+        public IEnumerator SetupBattle(BaseEnemy enemyUnit)
+        {
+            State = BattleState.START;
+            
+            Debug.Log("Battle started!");
+            
+            MenuManager.Instance.DeactivateObjects();
+            
+            EnemyUnit = enemyUnit;
+            
+            EnemyPrefab = enemyUnit.gameObject;
+
+            DialogueText = "The battle starts... Get Ready!";
+            
+            
+            yield return new WaitForSeconds(2f);
+            
+            State = BattleState.PLAYERTURN;
+            PlayerTurn();
+        }
+        
+
+        void PlayerTurn()
+        {
+            DialogueText = "Choose an action!";
+;        }
+        
+        
     }
 }

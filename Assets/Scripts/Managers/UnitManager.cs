@@ -74,7 +74,8 @@ namespace Managers
         // TODO Make this and SpawnHeroes generic functions
         public void SpawnEnemies()
         {
-            var enemyCount = 1;
+            var enemyCount = 6;
+            /*
             for (int i = 0; i < enemyCount; i++)
             {
                 var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
@@ -84,11 +85,37 @@ namespace Managers
                 randomSpawnTile.SetUnit(spawnedEnemy);
 
             }
+            */
+
+            var goblinPrefab = GetBaseEnemy(UnitType.Goblin);
+            var spawnedGoblin = Instantiate(goblinPrefab);
+            var goblinSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+            
+            goblinSpawnTile.SetUnit(spawnedGoblin);
+            
+            var demonPrefab = GetBaseEnemy(UnitType.Demon);
+            var spawnedDemon = Instantiate(demonPrefab);
+            var demonSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+            
+            demonSpawnTile.SetUnit(spawnedDemon);
+            
+            var undeadPrefab = GetBaseEnemy(UnitType.Undead);
+            var spawnedUndead = Instantiate(undeadPrefab);
+            var undeadSpawnTile = GridManager.Instance.GetEnemySpawnTile();
+            
+            undeadSpawnTile.SetUnit(spawnedUndead);
+            
             
             _enemies = GameObject.FindGameObjectsWithTag("Enemy")
                 .Select(obj => obj.GetComponent<BaseEnemy>())
                 .Where(enemy => enemy != null)
                 .ToList();
+            
+            Debug.Log("ENEMIES");
+            Debug.Log("First enemy: " + _enemies[0].UnitName);
+            Debug.Log("Second enemy: " + _enemies[1].UnitName);
+            Debug.Log("Third enemy: " + _enemies[2].UnitName);
+            
             
             //GameManager.Instance.ChangeState(GameState.HeroesTurn);
         }
@@ -104,7 +131,16 @@ namespace Managers
             
             BaseHero hero = (BaseHero)_units.First(u => u.unitType == unitType).UnitPrefab;
             hero.SetAttributes(strength, armor, power, intelligence, dexterity, agility, charisma, focus);
+            hero.SetHealth();
             return hero;
+        }
+        
+        public BaseEnemy GetBaseEnemy(UnitType unitType)
+        {
+
+            BaseEnemy enemy = (BaseEnemy)_units.First(u => u.unitType == unitType).UnitPrefab;
+            enemy.SetHealth();
+            return enemy;
         }
         
         

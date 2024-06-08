@@ -16,9 +16,9 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 06932db5fd5bf034e9ea35a2b17a4af8, type: 3}
   isDefaultItem: 0
   ItemPrefab: {fileID: 7106170837396658169, guid: 6fefab70bb22fac4d9822d8a5af32880, type: 3}
-  EquipSlot: 3
+  EquipSlot: 4
   ArmorModifier: 0
-  DamageModifier: 5
+  DamageModifier: 7
   PowerModifier: 0
   IntelligenceModifier: 0
   DexterityModifier: 0

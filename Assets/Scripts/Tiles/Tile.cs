@@ -39,7 +39,7 @@ namespace Tiles
 
         private void OnMouseEnter()
         {
-            if(MenuManager.Instance.InventoryOpen) return;
+            if(GameManager.Instance.GameState != GameState.Gameplay) return;
             
             _highlight.SetActive(true);
             MenuManager.Instance.ShowTileInfo(this);
@@ -47,7 +47,7 @@ namespace Tiles
 
         private void OnMouseExit()
         {
-            if(MenuManager.Instance.InventoryOpen) return;
+            if(GameManager.Instance.GameState != GameState.Gameplay) return;
             
             _highlight.SetActive(false);
             MenuManager.Instance.ShowTileInfo(null);
@@ -55,7 +55,7 @@ namespace Tiles
 
         private void OnMouseOver()
         {
-            if(MenuManager.Instance.InventoryOpen) return;
+            if(GameManager.Instance.GameState != GameState.Gameplay) return;
             // Check if the right mouse button is clicked while the cursor is over this tile
             if (Input.GetMouseButtonDown(1))
             {
@@ -77,9 +77,8 @@ namespace Tiles
         // MouseDown is only cared about when the GameState is Player's (Hero's) turn
         private void OnMouseDown()
         {
-            if(MenuManager.Instance.InventoryOpen) return;
+            if(GameManager.Instance.GameState != GameState.Gameplay) return;
             
-            if(GameManager.Instance.GameState != GameState.HeroesTurn) return;
 
             // Means that there is a unit on the tile
             if (OccupiedUnit != null)

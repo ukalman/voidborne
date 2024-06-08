@@ -73,7 +73,7 @@ namespace Managers
             // Spawn enemy on the right (right side of the map) on a Walkable tile
             return _tiles.Where(t => t.Key.x > _width / 2 && t.Value.Walkable).OrderBy(t => Random.value).First().Value;
         }
-
+        
         public Tile GetItemSpawnTile()
         {
             return _tiles

@@ -16,8 +16,8 @@ namespace Units
         public Faction Faction;
         
         
-        public int  MaxHealth = 100; // Total vitality
-        public int CurrentHealth { get; private set; }
+        public int  MaxHealth; // Total vitality
+        public int CurrentHealth;
         
         public Stat Strength; //  Directly impacts their melee damage output.
         public Stat Armor; //  Essential for withstanding attacks in melee combat.
@@ -53,9 +53,10 @@ namespace Units
             CurrentHealth = MaxHealth;
         }
 
-        private void Start()
+        public void Start()
         {
             IsMoving = false;
+            CurrentHealth = MaxHealth;
             //animator = GetComponent<Animator>();
         }
 
@@ -81,6 +82,11 @@ namespace Units
             Charisma.SetValue(charisma);
             Focus.SetValue(focus);
         }
+
+        public void SetHealth()
+        {
+            CurrentHealth = MaxHealth;
+        }
         
         
         // the parameter path, should be a list containing Tiles, not Vector2's.
@@ -94,7 +100,7 @@ namespace Units
             {
                 if (tile != OccupiedTile) // Ensure the tile is not the one we're already on
                 {
-                    _currentMovementCoroutine = StartCoroutine(MoveToTile(tile, 0.5f)); // Store the coroutine reference
+                    _currentMovementCoroutine = StartCoroutine(MoveToTile(tile, 0.5f - (0.05f * Agility.GetValue()) + 0.5f)); // Store the coroutine reference
                     yield return _currentMovementCoroutine; // Wait for the movement to complete
                 }
             }

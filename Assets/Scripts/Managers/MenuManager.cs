@@ -58,7 +58,7 @@ namespace Managers
 
             if (Input.GetKeyDown("i"))
             {
-                if (gameState == GameState.HeroesTurn || gameState == GameState.Gameplay || gameState == GameState.Inventory)
+                if (gameState == GameState.Gameplay || gameState == GameState.Inventory)
                 {
                     if (!InventoryOpen)
                     {
@@ -71,7 +71,7 @@ namespace Managers
                     
                     UIManager.Instance.CloseInventoryPanel();
                     InventoryOpen = false;
-                    GameManager.Instance.GameState = GameState.HeroesTurn;
+                    GameManager.Instance.GameState = GameState.Gameplay;
                     
                 } 
             }
@@ -79,11 +79,17 @@ namespace Managers
             
             
         }
-        
+
+        public void DeactivateObjects()
+        {
+            _selectedHeroObject.SetActive(false); 
+            _tileObject.SetActive(false); 
+            _tileUnitObject.SetActive(false); 
+        }
         
         public void ShowSelectedHero(BaseHero hero)
         {
-            if (hero == null)
+            if (hero == null || GameManager.Instance.GameState != GameState.Gameplay)
             {
                 _selectedHeroObject.SetActive(false); 
                 return;
@@ -95,7 +101,7 @@ namespace Managers
 
         public void ShowTileInfo(Tile tile)
         {
-            if (tile == null)
+            if (tile == null || GameManager.Instance.GameState != GameState.Gameplay)
             {
                 _tileObject.SetActive(false); 
                 _tileUnitObject.SetActive(false); 

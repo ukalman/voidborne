@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7534647689681575321}
   - component: {fileID: 6938140274140580748}
   - component: {fileID: 7939500275156868040}
+  - component: {fileID: 2411612095061983080}
   m_Layer: 0
   m_Name: Goblin
   m_TagString: Enemy
@@ -100,3 +101,44 @@ MonoBehaviour:
   UnitName: Goblin
   OccupiedTile: {fileID: 0}
   Faction: 1
+  MaxHealth: 15
+  CurrentHealth: 15
+  Strength:
+    baseValue: 1
+  Armor:
+    baseValue: 1
+  Power:
+    baseValue: 0
+  Intelligence:
+    baseValue: 1
+  Dexterity:
+    baseValue: 0
+  Agility:
+    baseValue: 6
+  Charisma:
+    baseValue: 0
+  Focus:
+    baseValue: 0
+  animator: {fileID: 2411612095061983080}
+  ItemToDrop: {fileID: 0}
+--- !u!95 &2411612095061983080
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5218677810103893473}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1bc29a941a977114a8604a0f60158c3c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

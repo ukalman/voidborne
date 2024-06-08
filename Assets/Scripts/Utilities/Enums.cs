@@ -8,6 +8,7 @@ namespace Utilities
         CharacterCreation,
         Level,
         Inventory,
+        Battle,
         Pause,
         Win,
         Lose
@@ -69,7 +70,8 @@ namespace Utilities
         Mage,
         Goblin,
         Demon,
-        Undead
+        Undead,
+        None
     }
     
     public enum EnemyType

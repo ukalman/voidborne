@@ -1,18 +1,26 @@
 using System;
 using UnityEngine;
 using Interaction;
+using Managers;
+using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.UI;
+using Utilities;
 
 namespace UI.Inventory
 {
     
     public class InventoryPanelController : MonoBehaviour
     {
+        public UnitType _unitType;
+        
         public Transform ItemsParent;
 
         public Transform ArmorParent;
         
         public Transform WeaponParent;
+
+        public Transform StatNumbersParent;
         
         private InventorySlot[] _slots;
         
@@ -20,10 +28,28 @@ namespace UI.Inventory
         
         private EquipmentSlot[] _weaponEquipmentSlots;
         
+        public Image ClassImage;
+        
+        private Sprite[] _classImages = new Sprite[3];
+        
         private Interaction.Inventory _inventory;
 
         private void Start()
         {
+            //_unitType = DataManager.Instance.PlayerUnitType;
+            
+            _classImages[0] = Resources.Load<Sprite>("Sprites/Weapons/weapon_lavish_sword");
+            _classImages[1] = Resources.Load<Sprite>("Sprites/Weapons/weapon_bow");
+            _classImages[2] = Resources.Load<Sprite>("Sprites/Weapons/weapon_red_magic_staff");
+
+            //ClassImage.sprite = _classImages[(int)_unitType];
+
+            for (int i = 0; i < 8; i++)
+            {
+                StatNumbersParent.GetChild(i).GetComponent<TMP_Text>().text = DataManager.Instance.Stats[i].ToString();
+            }
+            
+            
             _inventory = Interaction.Inventory.Instance;
             _inventory.OnItemChangedCallback += UpdateUI;
 
@@ -42,6 +68,7 @@ namespace UI.Inventory
         {
             _inventory.OnItemChangedCallback -= UpdateUI;
             EquipmentManager.Instance.onEquipmentChangedUI -= UpdateEquipmentUI;
+            GameManager.Instance.ChangeState(GameState.Gameplay);
         }
 
 

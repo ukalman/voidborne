@@ -21,6 +21,13 @@ namespace Managers
 
         public string AvatarName;
         public BaseHero Hero;
+        public UnitType PlayerUnitType;
+
+        public int[] Stats;
+
+        public delegate void OnPlayerCreated();
+
+        public static OnPlayerCreated onPlayerCreated;
         
         private void Awake()
         {
@@ -37,6 +44,7 @@ namespace Managers
 
         private void Start()
         {
+            Stats = new int[8];
             //throw new NotImplementedException();
             // Initialize hero (if created)
         }
@@ -47,12 +55,25 @@ namespace Managers
             BaseHero hero = CreateCharacter(unitType, strength, armor, power, intelligence, dexterity, agility,
                 charisma, focus);
             SaveCharacter(avatarName, hero);
+            onPlayerCreated?.Invoke();
             // SaveCharacterToPrefs(hero); YORUMDAN ÇIKAR
         }
 
         // Character will be created after the Player has determined the attributes, and the class of the Hero
         public BaseHero CreateCharacter(UnitType unitType, int strength, int armor, int power, int intelligence, int dexterity, int agility, int charisma, int focus)
         {
+            PlayerUnitType = unitType;
+
+            Stats[0] = strength;
+            Stats[1] = armor;
+            Stats[2] = power;
+            Stats[3] = intelligence;
+            Stats[4] = dexterity;
+            Stats[5] = agility;
+            Stats[6] = charisma;
+            Stats[7] = focus;
+                        
+        
             return UnitManager.Instance.GetBaseHero(unitType, strength, armor, power, intelligence, dexterity, agility,
                 charisma, focus);
         }
