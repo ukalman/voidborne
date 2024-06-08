@@ -12,12 +12,15 @@ namespace UI.CharacterCreation
     {
         public TMP_InputField CharacterNameInputField;
         public GameObject CharacterStatsPanel;
+        public CharacterClassInputPanelController CharacterClassPanel;
         public TMP_Text FreePointsDisplay;
 
         public Button ReadyUnreadyButton;
         public Button ConfirmButton;
         public Button ResetButton;
         public Button ReturnButton;
+
+        private StatInputPanelController[] _statInputs;
         
         
         public TMP_Text ReadyUnreadyText;
@@ -28,6 +31,8 @@ namespace UI.CharacterCreation
         public static bool IsReadyClicked = false;
 
         public static UnityAction OnResetAttributes = delegate { };
+        
+        
         
         
         public static void OnDecrementStat()
@@ -87,6 +92,38 @@ namespace UI.CharacterCreation
         public void OnReturnButtonClicked()
         {
             GameManager.Instance.ChangeState(GameState.Start);
+        }
+
+        public void OnConfirmButtonClicked()
+        {
+            UnitType unitType = UnitType.Knight;
+            var unitTypeString = CharacterClassPanel.ClassNameDisplay.text;
+
+            if (unitTypeString.Equals("Archer"))
+            {
+                unitType = UnitType.Archer;
+            } else if (unitTypeString.Equals("Mage"))
+            {
+                unitType = UnitType.Mage;
+            }
+            
+            
+            
+            _statInputs = CharacterStatsPanel.GetComponentsInChildren<StatInputPanelController>();
+            Debug.Log(_statInputs == null);
+            Debug.Log(_statInputs.Length);
+            Debug.Log(CharacterNameInputField.text);
+            
+            Debug.Log("stat total points: ");
+            for (int i = 0; i < _statInputs.Length; i++)
+            {
+                Debug.Log(_statInputs[i].TotalPoints);
+            }
+            
+            DataManager.Instance.CreateAndSaveCharacter(CharacterNameInputField.text, unitType, _statInputs[0].TotalPoints, _statInputs[1].TotalPoints, _statInputs[2].TotalPoints, _statInputs[3].TotalPoints, _statInputs[4].TotalPoints, _statInputs[5].TotalPoints, _statInputs[6].TotalPoints, _statInputs[7].TotalPoints);
+            UIManager.Instance.CloseCharacterCreationPanel();
+            
+            GameManager.Instance.ChangeState(GameState.LevelPrep);
         }
         
     }

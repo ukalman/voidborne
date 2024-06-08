@@ -39,6 +39,7 @@ namespace Managers
         // TODO Make this and SpawnEnemies generic functions
         public void SpawnHeroes()
         {
+            /*
             var heroCount = 1;
             for (int i = 0; i < heroCount; i++)
             {
@@ -49,7 +50,24 @@ namespace Managers
                 randomSpawnTile.SetUnit(spawnedHero);
 
             }
+            */
+
             
+            var heroPrefab = GetBaseHero(UnitType.Knight, 10, 10, 10, 10, 10, 10, 10, 10);
+            var spawnedHero = Instantiate(heroPrefab);
+            var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
+            
+            randomSpawnTile.SetUnit(spawnedHero);
+            
+        
+            /*
+            var spawnedHero = Instantiate(DataManager.Instance.Hero);
+            var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
+            
+            randomSpawnTile.SetUnit(spawnedHero);
+            */
+
+
             //GameManager.Instance.ChangeState(GameState.SpawnEnemies);
         }
         
@@ -80,13 +98,15 @@ namespace Managers
             // go through the list (_units), we want all of the units according to the faction that we want, we randomly shuffle them, then select the first one and return its prefab
             return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
         }
-
-        public BaseHero GetBaseHero(HeroType heroType, int strength, int armor, int power, int intelligence, int dexterity, int agility, int charisma, int focus)
+        
+        public BaseHero GetBaseHero(UnitType unitType, int strength, int armor, int power, int intelligence, int dexterity, int agility, int charisma, int focus)
         {
-            BaseHero hero = (BaseHero)_units.First(u => u.HeroType == heroType).UnitPrefab;
+            
+            BaseHero hero = (BaseHero)_units.First(u => u.unitType == unitType).UnitPrefab;
             hero.SetAttributes(strength, armor, power, intelligence, dexterity, agility, charisma, focus);
             return hero;
         }
+        
         
 
         public void SetSelectedHero(BaseHero hero)

@@ -68,7 +68,6 @@ namespace Managers
                         return;
                     }
                     
-                    //Debug.Log("YAYYYYYYYYYYYYYYY");
                     
                     UIManager.Instance.CloseInventoryPanel();
                     InventoryOpen = false;
@@ -89,7 +88,8 @@ namespace Managers
                 _selectedHeroObject.SetActive(false); 
                 return;
             }
-            _selectedHeroObject.GetComponentInChildren<TMP_Text>().text = hero.UnitName;
+            //_selectedHeroObject.GetComponentInChildren<TMP_Text>().text = hero.UnitName;
+            _selectedHeroObject.GetComponentInChildren<TMP_Text>().text = DataManager.Instance.AvatarName;
             _selectedHeroObject.SetActive(true);
         }
 

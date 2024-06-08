@@ -71,6 +71,11 @@ namespace Managers
             CoreUISignals.Instance.OnClosePanel?.Invoke(1);
         }
 
+        public void CloseCharacterCreationPanel()
+        {
+            CoreUISignals.Instance.OnClosePanel?.Invoke(0);
+        }
+
         
         
         

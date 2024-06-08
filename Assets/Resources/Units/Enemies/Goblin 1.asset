@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 640ded863b414fe2b26098e864f2afd7, type: 3}
   m_Name: Goblin 1
   m_EditorClassIdentifier: 
+  unitType: 3
   Faction: 1
   UnitPrefab: {fileID: 7939500275156868040, guid: 7da4e8e53048d294090e4399abc625ca, type: 3}

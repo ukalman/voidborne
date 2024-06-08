@@ -2105,7 +2105,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1179536745243112268}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4581551181073605110}
+        m_TargetAssemblyTypeName: UI.CharacterCreation.CharacterCreationPanelController,
+          Assembly-CSharp
+        m_MethodName: OnConfirmButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5363390003561937624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2802,6 +2815,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterNameInputField: {fileID: 4022112447362421641}
   CharacterStatsPanel: {fileID: 5963455246179228698}
+  CharacterClassPanel: {fileID: 4418869719340435159}
   FreePointsDisplay: {fileID: 4780294447224882925}
   ReadyUnreadyButton: {fileID: 960315101234014200}
   ConfirmButton: {fileID: 8263325071773755555}

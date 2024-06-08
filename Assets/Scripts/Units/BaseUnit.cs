@@ -43,11 +43,23 @@ namespace Units
         
         private Coroutine _currentMovementCoroutine;
 
+        private static readonly int Moving = Animator.StringToHash("IsMoving");
+        
+        [SerializeField]
+        protected Animator animator;
+
         private void Awake()
         {
             CurrentHealth = MaxHealth;
         }
 
+        private void Start()
+        {
+            IsMoving = false;
+            //animator = GetComponent<Animator>();
+        }
+
+        /*
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))
@@ -55,6 +67,7 @@ namespace Units
                 TakeDamage(10);
             }
         }
+        */
 
         public virtual void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility,
             int charisma, int focus)
@@ -74,6 +87,7 @@ namespace Units
         public IEnumerator FollowPath(List<Tile> path)
         {
             IsMoving = true;
+            animator.SetBool(Moving, IsMoving);
             Debug.Log(path.Count);
 
             foreach (Tile tile in path)
@@ -86,6 +100,7 @@ namespace Units
             }
 
             IsMoving = false;
+            animator.SetBool(Moving, IsMoving);
             MenuManager.Instance.DeFocusToTile();
         }
 

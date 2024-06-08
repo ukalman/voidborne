@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1678688165686255468}
   - component: {fileID: 5931159577650725583}
   - component: {fileID: 7106991842097201950}
+  - component: {fileID: 3638947636041980599}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -100,3 +101,42 @@ MonoBehaviour:
   UnitName: Mage
   OccupiedTile: {fileID: 0}
   Faction: 0
+  MaxHealth: 100
+  Strength:
+    baseValue: 0
+  Armor:
+    baseValue: 0
+  Power:
+    baseValue: 0
+  Intelligence:
+    baseValue: 0
+  Dexterity:
+    baseValue: 0
+  Agility:
+    baseValue: 0
+  Charisma:
+    baseValue: 0
+  Focus:
+    baseValue: 0
+  animator: {fileID: 3638947636041980599}
+--- !u!95 &3638947636041980599
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742135827120169104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c871d9b05bb66954c996c767c7ae2234, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

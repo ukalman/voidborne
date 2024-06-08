@@ -6,7 +6,7 @@ namespace Interaction
     [CreateAssetMenu(fileName = "New Equipment", menuName = "Inventory/Equipment")]
     public class Equipment : Item
     {
-        public EquipmentSlot EquipSlot;
+        public EquipmentSlotEnum EquipSlot;
         
         public int ArmorModifier; //  Essential for withstanding attacks in melee combat.
         public int DamageModifier; //  Directly impacts the damage output.

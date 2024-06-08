@@ -62,21 +62,31 @@ namespace Utilities
         Death
     }
 
-    public enum HeroType
+    public enum UnitType
     {
         Knight,
         Archer,
-        Mage
+        Mage,
+        Goblin,
+        Demon,
+        Undead
+    }
+    
+    public enum EnemyType
+    {
+        Goblin,
+        Demon,
+        Undead
     }
 
-    public enum EquipmentSlot
+    public enum EquipmentSlotEnum
     {
         Head,
         Chest,
-        Legs,
+        Feet,
+        Auxiliary,
         Weapon,
-        Shield,
-        Feet
+        SecondaryWeapon,
     }
     
 }
