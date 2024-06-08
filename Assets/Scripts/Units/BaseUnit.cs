@@ -16,8 +16,8 @@ namespace Units
         public Faction Faction;
         
         
-        public int  MaxHealth = 100; // Total vitality
-        public int CurrentHealth { get; private set; }
+        public int  MaxHealth; // Total vitality
+        public int CurrentHealth;
         
         public Stat Strength; //  Directly impacts their melee damage output.
         public Stat Armor; //  Essential for withstanding attacks in melee combat.
@@ -43,11 +43,24 @@ namespace Units
         
         private Coroutine _currentMovementCoroutine;
 
+        private static readonly int Moving = Animator.StringToHash("IsMoving");
+        
+        [SerializeField]
+        protected Animator animator;
+
         private void Awake()
         {
             CurrentHealth = MaxHealth;
         }
 
+        public void Start()
+        {
+            IsMoving = false;
+            CurrentHealth = MaxHealth;
+            //animator = GetComponent<Animator>();
+        }
+
+        /*
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.T))
@@ -55,6 +68,7 @@ namespace Units
                 TakeDamage(10);
             }
         }
+        */
 
         public virtual void SetAttributes(int strength, int armor, int power, int intelligence, int dexterity, int agility,
             int charisma, int focus)
@@ -68,24 +82,31 @@ namespace Units
             Charisma.SetValue(charisma);
             Focus.SetValue(focus);
         }
+
+        public void SetHealth()
+        {
+            CurrentHealth = MaxHealth;
+        }
         
         
         // the parameter path, should be a list containing Tiles, not Vector2's.
         public IEnumerator FollowPath(List<Tile> path)
         {
             IsMoving = true;
+            animator.SetBool(Moving, IsMoving);
             Debug.Log(path.Count);
 
             foreach (Tile tile in path)
             {
                 if (tile != OccupiedTile) // Ensure the tile is not the one we're already on
                 {
-                    _currentMovementCoroutine = StartCoroutine(MoveToTile(tile, 0.5f)); // Store the coroutine reference
+                    _currentMovementCoroutine = StartCoroutine(MoveToTile(tile, 0.5f - (0.05f * Agility.GetValue()) + 0.5f)); // Store the coroutine reference
                     yield return _currentMovementCoroutine; // Wait for the movement to complete
                 }
             }
 
             IsMoving = false;
+            animator.SetBool(Moving, IsMoving);
             MenuManager.Instance.DeFocusToTile();
         }
 

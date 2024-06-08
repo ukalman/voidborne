@@ -1,5 +1,6 @@
 using Managers;
 using UnityEngine;
+using Utilities;
 
 namespace Interaction
 {
@@ -7,9 +8,10 @@ namespace Interaction
     {
         public Item Item;
 
-        // Sine wave movement parameters
-        public float amplitude = 1f;  // Amplitude of the sine wave
-        public float frequency = 1f;  // Frequency of the sine wave
+        public UnitType WhichUnitType;
+        
+        public float amplitude = 1f;  
+        public float frequency = 1f;
         private Vector3 startPosition;
 
         private void Start()
@@ -42,14 +44,19 @@ namespace Interaction
 
         void PickUp()
         {
-            Debug.Log("Picking up " + Item.ItemName);
-            bool wasPickedUp = Inventory.Instance.Add(Item);
-            InteractableManager.Instance.RemoveFocus();
-
-            if (wasPickedUp)
+            if (DataManager.Instance.PlayerUnitType == WhichUnitType || WhichUnitType == UnitType.None)
             {
-                Destroy(gameObject);
+                Debug.Log("Picking up " + Item.ItemName);
+                bool wasPickedUp = Inventory.Instance.Add(Item);
+                InteractableManager.Instance.RemoveFocus();
+
+                if (wasPickedUp)
+                {
+                    Destroy(gameObject);
+                }
             }
+            
+            
         }
     }
 }

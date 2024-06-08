@@ -1,5 +1,6 @@
 using System;
 using Units.Heroes;
+using UnityEngine.Serialization;
 using Utilities;
 
 namespace Data
@@ -7,7 +8,7 @@ namespace Data
     [Serializable]
     public class HeroData
     {
-        public HeroType HeroType; // Assuming HeroType is serializable
+        [FormerlySerializedAs("HeroType")] public UnitType unitType; // Assuming UnitType is serializable
         public int Strength;
         public int Armor;
         public int Power;
@@ -21,7 +22,7 @@ namespace Data
         {
             if (hero != null)
             {
-                // HeroType = hero.HeroType;  // Assuming HeroType is a field you want to serialize
+                // UnitType = hero.UnitType;  // Assuming UnitType is a field you want to serialize
                 Strength = hero.Strength.GetValue();
                 Armor = hero.Armor.GetValue();
                 Power = hero.Power.GetValue();

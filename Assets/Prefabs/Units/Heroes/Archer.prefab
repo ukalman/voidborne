@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1678688165686255468}
   - component: {fileID: 5931159577650725583}
   - component: {fileID: 4169176063437732717}
+  - component: {fileID: 377840270180381604}
   m_Layer: 0
   m_Name: Archer
   m_TagString: Untagged
@@ -100,3 +101,42 @@ MonoBehaviour:
   UnitName: Archer
   OccupiedTile: {fileID: 0}
   Faction: 0
+  MaxHealth: 100
+  Strength:
+    baseValue: 10
+  Armor:
+    baseValue: 10
+  Power:
+    baseValue: 10
+  Intelligence:
+    baseValue: 10
+  Dexterity:
+    baseValue: 10
+  Agility:
+    baseValue: 10
+  Charisma:
+    baseValue: 10
+  Focus:
+    baseValue: 10
+  animator: {fileID: 377840270180381604}
+--- !u!95 &377840270180381604
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5742135827120169104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f4b4d28a3ed7e2b4fb39466653d4e39a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

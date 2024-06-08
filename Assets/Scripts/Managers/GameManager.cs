@@ -25,7 +25,7 @@ namespace Managers
         private void Start()
         {
             //ChangeState(GameState.Start);
-            ChangeState(GameState.LevelPrep);
+            ChangeState(GameState.Start);
         }
         
         /*
@@ -61,8 +61,8 @@ namespace Managers
                     GridManager.Instance.GenerateGrid();
                     break;
                 case GameState.Battle:
-                    StartCoroutine(BattleManager.Instance.InitiateBattle());
-                    ChangeState(GameState.HeroesTurn);
+                    //StartCoroutine(BattleManager.Instance.InitiateBattle());
+                    UIManager.Instance.OpenBattlePanel();
                     break;
                 case GameState.LevelPrep:
                     LevelPreparation();

@@ -100,5 +100,6 @@ MonoBehaviour:
   Name: Bow of the Wronged Ranger
   OccupiedTile: {fileID: 0}
   Item: {fileID: 11400000, guid: c86047eda1c7d6f4e8ceceb80a415bf7, type: 2}
+  WhichUnitType: 1
   amplitude: 0.05
   frequency: 3

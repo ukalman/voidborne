@@ -58,7 +58,7 @@ namespace Managers
 
             if (Input.GetKeyDown("i"))
             {
-                if (gameState == GameState.HeroesTurn || gameState == GameState.Gameplay || gameState == GameState.Inventory)
+                if (gameState == GameState.Gameplay || gameState == GameState.Inventory)
                 {
                     if (!InventoryOpen)
                     {
@@ -68,11 +68,10 @@ namespace Managers
                         return;
                     }
                     
-                    //Debug.Log("YAYYYYYYYYYYYYYYY");
                     
                     UIManager.Instance.CloseInventoryPanel();
                     InventoryOpen = false;
-                    GameManager.Instance.GameState = GameState.HeroesTurn;
+                    GameManager.Instance.GameState = GameState.Gameplay;
                     
                 } 
             }
@@ -80,22 +79,29 @@ namespace Managers
             
             
         }
-        
+
+        public void DeactivateObjects()
+        {
+            _selectedHeroObject.SetActive(false); 
+            _tileObject.SetActive(false); 
+            _tileUnitObject.SetActive(false); 
+        }
         
         public void ShowSelectedHero(BaseHero hero)
         {
-            if (hero == null)
+            if (hero == null || GameManager.Instance.GameState != GameState.Gameplay)
             {
                 _selectedHeroObject.SetActive(false); 
                 return;
             }
-            _selectedHeroObject.GetComponentInChildren<TMP_Text>().text = hero.UnitName;
+            //_selectedHeroObject.GetComponentInChildren<TMP_Text>().text = hero.UnitName;
+            _selectedHeroObject.GetComponentInChildren<TMP_Text>().text = DataManager.Instance.AvatarName;
             _selectedHeroObject.SetActive(true);
         }
 
         public void ShowTileInfo(Tile tile)
         {
-            if (tile == null)
+            if (tile == null || GameManager.Instance.GameState != GameState.Gameplay)
             {
                 _tileObject.SetActive(false); 
                 _tileUnitObject.SetActive(false); 

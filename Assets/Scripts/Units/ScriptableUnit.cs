@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Utilities;
 
 namespace Units
@@ -6,7 +7,7 @@ namespace Units
     [CreateAssetMenu(fileName = "New Unit", menuName = "Scriptable Unit")]
     public class ScriptableUnit : ScriptableObject
     {
-        public HeroType HeroType;
+        [FormerlySerializedAs("HeroType")] public UnitType unitType;
         public Faction Faction;
         public BaseUnit UnitPrefab;
     }

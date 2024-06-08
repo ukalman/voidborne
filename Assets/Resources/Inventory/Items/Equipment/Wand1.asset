@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2449df3a74d14c9fb2b9fd4c6017a338, type: 3}
+  m_Name: Wand1
+  m_EditorClassIdentifier: 
+  ItemName: Pioneer Wand
+  icon: {fileID: 21300000, guid: 954b02d743a0a7140a9c8da8d1c77ee3, type: 3}
+  isDefaultItem: 0
+  ItemPrefab: {fileID: 7106170837396658169, guid: 6e99fdd186fd3cc46868152d5bda8051, type: 3}
+  EquipSlot: 3
+  ArmorModifier: 0
+  DamageModifier: 0
+  PowerModifier: 2
+  IntelligenceModifier: 0
+  DexterityModifier: 0
+  AgilityModifier: 0
+  CharismaModifier: 0
+  FocusModifier: 0
