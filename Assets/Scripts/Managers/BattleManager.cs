@@ -111,7 +111,102 @@ namespace Managers
         {
             DialogueText = "Choose an action!";
 ;        }
+
+        public void OnAttackButton()
+        {
+            if (State != BattleState.PLAYERTURN)
+            {
+                return;
+            }
+
+            StartCoroutine(PlayerAttack());
+        }
         
-        
+        public void OnHealButton()
+        {
+            if (State != BattleState.PLAYERTURN)
+            {
+                return;
+            }
+
+            StartCoroutine(PlayerHeal());
+        }
+
+        public IEnumerator PlayerAttack()
+        {
+            int damage = PlayerUnit.Attack(EnemyUnit);
+
+            PanelController.EnemyHUD.SetHP(EnemyUnit.CurrentHealth);
+            DialogueText = EnemyUnit.UnitName + " got " + damage.ToString() + " damage!";
+            
+            
+            bool isDead = EnemyUnit.DeathControl();
+            
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                State = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                State = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
+
+        }
+
+        public IEnumerator PlayerHeal()
+        {
+            PlayerUnit.Heal(10);
+            
+            PanelController.PlayerHUD.SetHP(PlayerUnit.CurrentHealth);
+            DialogueText = "You are healed!";
+
+            yield return new WaitForSeconds(1f);
+
+            State = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+        IEnumerator EnemyTurn()
+        {
+            DialogueText = EnemyUnit.UnitName + " attacks!";
+
+            yield return new WaitForSeconds(1f);
+
+            EnemyUnit.Attack(PlayerUnit);
+            
+            bool isDead = PlayerUnit.DeathControl();
+            
+            PanelController.PlayerHUD.SetHP(PlayerUnit.CurrentHealth);
+
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                State = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                State = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+            
+            
+        }
+
+        void EndBattle()
+        {
+            if (State == BattleState.WON)
+            {
+                DialogueText = "Battle is Won!";
+            } else if (State == BattleState.LOST)
+            {
+                DialogueText = "You are defeated! Game Over!";
+            }
+        }
     }
 }

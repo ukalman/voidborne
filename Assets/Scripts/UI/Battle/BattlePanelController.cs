@@ -16,6 +16,9 @@ namespace UI.Battle
         public BattleHUD EnemyHUD;
 
         public TMP_Text DialogueText;
+
+        public Button AttackButton;
+        public Button HealButton;
         
 
         private void Awake()
@@ -28,15 +31,49 @@ namespace UI.Battle
             SetupBattle();
         }
 
+        private void Update()
+        {
+            UpdateInteractivity();
+            UpdateDialogueText();
+        }
+
         void SetupBattle()
         {
             
             PlayerHUD.SetHUD(BattleManager.Instance.PlayerUnit);
             EnemyHUD.SetHUD(BattleManager.Instance.EnemyUnit);
             
-            
-            
-
         }
+
+        public void OnAttackButton()
+        {
+            StartCoroutine(BattleManager.Instance.PlayerAttack());
+        }
+        
+        public void OnHealButton()
+        {
+            StartCoroutine(BattleManager.Instance.PlayerHeal());
+        }
+
+        private void UpdateInteractivity()
+        {
+            if (BattleManager.Instance.State != BattleState.PLAYERTURN)
+            {
+                AttackButton.interactable = false;
+                HealButton.interactable = false;
+            }
+            else
+            {
+                AttackButton.interactable = true;
+                HealButton.interactable = true; 
+            }
+        }
+
+        private void UpdateDialogueText()
+        {
+            DialogueText.text = BattleManager.Instance.DialogueText;
+        }
+        
+        
     }
 }

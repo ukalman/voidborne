@@ -177,16 +177,16 @@ namespace Units
         }
         
         
-        public virtual void Attack(BaseUnit target)
+        public virtual int Attack(BaseUnit target)
         {
             // Implement generic attack logic here
-            target.TakeDamage(Strength.GetValue());
+            return target.TakeDamage(Strength.GetValue() * 1.5f + Power.GetValue() * 1.5f + Focus.GetValue() * 1.5f);
             //target.CurrentHealth -= this.Strength.GetValue() - target.Armor.GetValue();
             //target.DeathControl();
             // Example: target.Health -= this.Strength * this.weapon.damage - target.Armor;
         }
         
-        public void TakeDamage(int damage)
+        public int TakeDamage(int damage)
         {
             damage -= Armor.GetValue();
             damage = Mathf.Clamp(damage, 0, int.MaxValue);
@@ -194,19 +194,34 @@ namespace Units
             CurrentHealth -= damage;
             Debug.Log(transform.name + " takes " + damage + " damage.");
             DeathControl();
-            
+
+            return damage;
+
         }
 
 
-        public void DeathControl()
+        public void Heal(int amount)
+        {
+            CurrentHealth += amount;
+
+            if (CurrentHealth > MaxHealth)
+            {
+                CurrentHealth = MaxHealth;
+            }
+        }
+
+        public bool DeathControl()
         {
             Debug.Log(this.UnitName + " Health: " + CurrentHealth);
             if (CurrentHealth <= 0)
             {
                 Debug.Log(this.UnitName + " is dead");
+                return true;
                 Destroy(this);
                 Die();
             }
+
+            return false;
         }
 
         public virtual void Die()
