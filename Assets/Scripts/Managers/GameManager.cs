@@ -103,6 +103,7 @@ namespace Managers
             //UnitManager.Instance.SpawnHeroes();
             //UnitManager.Instance.SpawnEnemies();
             //InteractableManager.Instance.SpawnItems();
+            GridManager.Instance.FillGrid();
             ChangeState(GameState.HeroesTurn);
         }
         

@@ -17,6 +17,7 @@ namespace Tiles
             if (possibleSprites != null && possibleSprites.Length > 0)
             {
                 this.GetComponent<SpriteRenderer>().sprite = possibleSprites[Random.Range(0, possibleSprites.Length)];
+                _originalSprite = this.GetComponent<SpriteRenderer>().sprite;
             }
             else
             {

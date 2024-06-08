@@ -51,10 +51,10 @@ namespace Units.Enemies
             if (playerTransform == null)
                 return false;
 
-            Vector2 enemyPosition = new Vector2(Mathf.RoundToInt(transform.position.x),
-                Mathf.RoundToInt(transform.position.y));
-            Vector2 playerPosition = new Vector2(Mathf.RoundToInt(playerTransform.position.x),
-                Mathf.RoundToInt(playerTransform.position.y));
+            Vector2 enemyPosition = new Vector2(transform.position.x,
+                transform.position.y);
+            Vector2 playerPosition = new Vector2(playerTransform.position.x,
+                playerTransform.position.y);
 
             // Use A* to find a path from enemy to player
             pathToPlayer = GridManager.Instance.FindPath(enemyPosition, playerPosition);

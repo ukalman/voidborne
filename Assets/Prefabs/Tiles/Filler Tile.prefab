@@ -99,12 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileName: Filler
-  _originalColor: {r: 0, g: 0, b: 0, a: 0}
+  _originalColor: {r: 1, g: 1, b: 1, a: 0}
   _flashColor: {r: 1, g: 0, b: 0, a: 1}
   _renderer: {fileID: 7926493038302575258}
   _highlight: {fileID: 5992885907422149249}
   _focusHighlight: {fileID: 4244893108792249594}
-  _isWalkable: 1
+  _isWalkable: 0
   OccupiedUnit: {fileID: 0}
   OccupiedInteractable: {fileID: 0}
   IsFlashing: 0

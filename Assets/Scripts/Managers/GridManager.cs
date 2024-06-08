@@ -61,6 +61,36 @@ namespace Managers
             //GameManager.Instance.ChangeState(GameState.SpawnHeroes);
             
         }
+        
+        public void FillGrid()
+        {
+            _tiles = new Dictionary<Vector2, Tile>();
+            _pathNodes = new Dictionary<Vector2, PathNode>();
+
+            // Find all tiles in the scene
+            Tile[] allTiles = FindObjectsOfType<Tile>();
+
+            foreach (Tile tile in allTiles)
+            {
+                // Get the tile's position
+                Vector2 tilePosition = new Vector2(tile.transform.position.x, tile.transform.position.y);
+
+                // Set the tile name based on its position (if needed)
+                tile.name = $"Tile {tilePosition.x} {tilePosition.y}";
+
+                // Add the tile to the _tiles dictionary
+                _tiles[tilePosition] = tile;
+
+                // Add the tile to the _pathNodes dictionary
+                _pathNodes[tilePosition] = new PathNode { Position = tilePosition, Walkable = tile.Walkable };
+            }
+
+            // Adjust the camera position
+            _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, (float)_height / 2 - 0.5f, -10);
+    
+            //GameManager.Instance.ChangeState(GameState.SpawnHeroes);
+        }
+
 
         public Tile GetHeroSpawnTile()
         {

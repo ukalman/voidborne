@@ -22,6 +22,7 @@ namespace Tiles
         [SerializeField] private GameObject _highlight;
         [SerializeField] private GameObject _focusHighlight;
         [SerializeField] private bool _isWalkable;
+        protected Sprite _originalSprite;
 
         public BaseUnit OccupiedUnit;
         public Interactable OccupiedInteractable;
@@ -184,6 +185,9 @@ namespace Tiles
                     yield return null;
                 }
             }
+            
+            _renderer.color = new Color(_originalColor.r, _originalColor.g, _originalColor.b, 1f);
+            
         }
 
         public void SetToOriginalColor()
